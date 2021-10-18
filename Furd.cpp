@@ -8,6 +8,11 @@ using namespace std;
 
 typedef char tcad[30];
 
+void pruebaDeEscritorio(){
+    PruebaEscritori pruebaEsc;
+    pruebaEsc.iniciar();
+}
+
 void obtenerNumeroAleatorio()
 {
     int max, numRandom;
@@ -89,6 +94,7 @@ int menu(int &opcion)
     cout << "3- Restar Horas" << endl;
     cout << "4- Regla de 3 simples" << endl;
     cout << "5- Obtener numero random" << endl;
+    cout << "6- Prueba de escritorio" << endl;
     cout << "10- Salir" << endl;
     cout << "-----------------------------------------------------------------" << endl;
     cin >> opcion;
@@ -117,6 +123,9 @@ int main(int argc, char *argv[])
             break;
         case 5:
             obtenerNumeroAleatorio();
+            break;
+        case 6:
+            pruebaDeEscritorio();
             break;
         case 10:
             cout << "Gracias por usar el programa" << endl;
