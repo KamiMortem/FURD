@@ -25,7 +25,7 @@ private:
     void iniciaListaValor(tlistaValor &tlista);
     void crearValor(pvalor &nuevo, tlistaValor &lista);
     float buscarUltimoValor(tlistaValor lista, tcad variable);
-    void mostrar(tlistaValor lista, bool todo);
+    void mostrar(tlistaValor lista, int opcion);
     void limpiarListaValor(tlistaValor &lista);
 
 public:
@@ -54,7 +54,7 @@ void PruebaEscritori::agregarFinal(tlistaValor &lista, pvalor nuevo)
         lista.final->sig = nuevo;
         lista.final = nuevo;
     }
-    lista.contador=lista.contador++;
+    lista.contador = lista.contador++;
 }
 
 float PruebaEscritori::buscarUltimoValor(tlistaValor lista, tcad variable)
@@ -63,7 +63,7 @@ float PruebaEscritori::buscarUltimoValor(tlistaValor lista, tcad variable)
     float encontrado;
     if (lista.inicio != NULL)
         for (i = lista.inicio; i != NULL; i = i->sig)
-            if (i->variable == variable)
+            if (strcmp(i->variable, variable) == 0)
                 encontrado = i->valor;
     return encontrado;
 }
@@ -88,25 +88,26 @@ void PruebaEscritori::crearValor(pvalor &nuevo, tlistaValor &lista)
         cout << "MEMORIA INSUFICIENTE" << endl;
 }
 
-void PruebaEscritori::mostrar(tlistaValor lista, bool todo)
+void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
 {
-    pvalor i, auxValor;
-    int ultimo = 0;
+    pvalor i = NULL, auxValor = NULL;
+    int ultimo;
     tcad variables[20];
     float valores[20];
     bool banderaJ;
     if (lista.inicio != NULL)
     {
+        ultimo = 0;
         for (i = lista.inicio; i != NULL; i = i->sig)
         {
-            if (todo)
+            if (opcion == 2)
             {
                 cout << i->variable << "= " << i->valor << endl;
             }
             else
             {
                 banderaJ = false;
-                for (int j = 0; j < 20; j++)
+                for (int j = 0; j < ultimo; j++)
                 {
                     if (ultimo != 0)
                     {
@@ -123,7 +124,7 @@ void PruebaEscritori::mostrar(tlistaValor lista, bool todo)
                 }
             }
         }
-        if (todo == false)
+        if (opcion == 1)
         {
             cout << "-----------------------------" << endl;
             cout << "............................." << endl;
@@ -193,7 +194,7 @@ void PruebaEscritori::iniciaListaValor(tlistaValor &tlista)
 
 void PruebaEscritori::iniciar()
 {
-    int opcion;
+    int opcion = 1;
     tlistaValor lista;
     pvalor nuevo;
 
@@ -205,13 +206,23 @@ void PruebaEscritori::iniciar()
         agregarFinal(lista, nuevo);
         do
         {
-            mostrar(lista, false);
-            cout << "Desea agregar un nuevo valor? 0:NO 1:SI" << endl;
-            cin >> opcion;
-        } while (opcion != 0 && opcion != 1);
+            do
+            {
+                mostrar(lista, 1);
+                cout << "Desea agregar un nuevo valor?   0:NO   1:SI   2:Mostrar Todo" << endl;
+                cin >> opcion;
+                if (opcion == 2)
+                {
+                    mostrar(lista, 2);
+                }
+            } while (opcion != 0 && opcion != 1);
+        } while (opcion != 0 && opcion != 1 && opcion != 2);
     } while (opcion != 0);
     cout << "-----------------------------" << endl;
-    mostrar(lista, true);
+    mostrar(lista, 1);
     cout << "-----------------------------" << endl;
+    mostrar(lista, 2);
+    cout << "-----------------------------" << endl;
+
     limpiarListaValor(lista);
 }
