@@ -26,6 +26,7 @@ private:
     void crearValor(pvalor &nuevo, tlistaValor &lista);
     float buscarUltimoValor(tlistaValor lista, tcad variable);
     void mostrar(tlistaValor lista, bool todo);
+    void limpiarListaValor(tlistaValor &lista);
 
 public:
     PruebaEscritori(/* args */);
@@ -53,6 +54,7 @@ void PruebaEscritori::agregarFinal(tlistaValor &lista, pvalor nuevo)
         lista.final->sig = nuevo;
         lista.final = nuevo;
     }
+    lista.contador=lista.contador++;
 }
 
 float PruebaEscritori::buscarUltimoValor(tlistaValor lista, tcad variable)
@@ -146,6 +148,42 @@ void PruebaEscritori::mostrar(tlistaValor lista, bool todo)
     }
 }
 
+void PruebaEscritori::limpiarListaValor(tlistaValor &lista)
+{
+    pvalor val, i;
+    int maxValor = lista.contador;
+    for (int j = 0; j < maxValor; j++)
+    {
+        do
+        {
+            if (lista.inicio == NULL)
+            {
+                val = NULL;
+                delete (val);
+            }
+            else
+            {
+                if (lista.inicio == lista.final)
+                {
+                    val = lista.inicio;
+                    lista.inicio = NULL;
+                    lista.final = NULL;
+                }
+                else
+                {
+                    for (i = lista.inicio; (i->sig)->sig != lista.final; i = i->sig)
+                        ;
+                    val = lista.final;
+                    lista.final = i;
+                    lista.final->sig = NULL;
+                }
+                delete (val);
+                lista.contador--;
+            }
+        } while (lista.contador != 0);
+    }
+}
+
 void PruebaEscritori::iniciaListaValor(tlistaValor &tlista)
 {
     tlista.inicio = NULL;
@@ -175,4 +213,5 @@ void PruebaEscritori::iniciar()
     cout << "-----------------------------" << endl;
     mostrar(lista, true);
     cout << "-----------------------------" << endl;
+    limpiarListaValor(lista);
 }
