@@ -8,7 +8,8 @@ using namespace std;
 
 typedef char tcad[30];
 
-void pruebaDeEscritorio(){
+void pruebaDeEscritorio()
+{
     PruebaEscritori pruebaEsc;
     pruebaEsc.iniciar();
 }
@@ -19,16 +20,19 @@ void obtenerNumeroAleatorio()
     srand((unsigned)time(0));
     cout << "Ingrese un valor maximo" << endl;
     cin >> max;
-
+    cout << endl;
     numRandom = (rand() % max) + 1;
-    cout << "El numero random entre 1 y " << max << " es:" << numRandom << endl;
+    cout << "El numero random entre 1 y " << max << " es:" << numRandom << endl
+         << endl;
 }
 
 Hora insertarHora(tcad mensaje)
 {
     int hora1, minuto1, segundo1;
+    cout << endl
+         << "* Ingrese Primero hora, luego minuto y al final segundo. Si quiere ingresarlo en una sola linea, separelos con un +" << endl
+         << endl;
     cout << mensaje << endl;
-
     cin >> hora1;
     do
     {
@@ -39,7 +43,9 @@ Hora insertarHora(tcad mensaje)
         cin >> segundo1;
     } while (segundo1 > 60);
 
-    cout << "Inserto la Hora: " << hora1 << ":" << minuto1 << ":" << segundo1 << endl;
+    cout << endl
+         << "Inserto la Hora: " << hora1 << ":" << minuto1 << ":" << segundo1 << endl
+         << endl;
     Hora horaAux(hora1, minuto1, segundo1);
     return horaAux;
 }
