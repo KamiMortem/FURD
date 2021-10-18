@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Hora.hpp"
 #include "Algebraico.hpp"
+#include "PruebaEscritori.hpp"
 
 using namespace std;
 
@@ -76,6 +77,8 @@ void sumarRestarHora(bool sumar)
 
 void reglaTresSimple()
 {
+    Algebraico alg;
+    alg.reglaDeTresSimple();
 }
 /* Menu principal */
 int menu(int &opcion)
