@@ -20,7 +20,7 @@ struct tlistaValor
 struct variablesAuxiliares
 {
     tcad variable;
-    float valor = -999;
+    float valor = -999999;
     bool existe = false;
 };
 
@@ -34,6 +34,7 @@ private:
     float buscarUltimoValor(tlistaValor lista, tcad variable);
     void mostrar(tlistaValor lista, int opcion);
     void mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int ultimo);
+    void mostrarMostrarAuxOpDosPositivo(variablesAuxiliares varAux[], int ultimo, bool positivo, int n);
     void mostrarBorrarAuxOpDos(variablesAuxiliares varAux[], tcad variables[], int ultimo);
     void limpiarListaValor(tlistaValor &lista);
 
@@ -96,13 +97,84 @@ void PruebaEscritori::crearValor(pvalor &nuevo, tlistaValor &lista)
     else
         cout << "MEMORIA INSUFICIENTE" << endl;
 }
+void PruebaEscritori::mostrarMostrarAuxOpDosPositivo(variablesAuxiliares varAux[], int ultimo, bool positivo, int n)
+{
+    int masMenos = 1;
+    if (positivo)
+    {
+        masMenos = 1;
+    }
+    else
+    {
+        masMenos = -1;
+    }
+
+    if (varAux[n].valor >= 10 * masMenos && varAux[n].valor < 100 * masMenos)
+    {
+        cout << varAux[n].valor << "     ";
+    }
+    else
+    {
+        if (varAux[n].valor >= 100 * masMenos && varAux[n].valor < 1000 * masMenos)
+        {
+            cout << varAux[n].valor << "    ";
+        }
+        else
+        {
+            if (varAux[n].valor >= 1000 * masMenos && varAux[n].valor < 10000 * masMenos)
+            {
+                cout << varAux[n].valor << "   ";
+            }
+            else
+            {
+                if (varAux[n].valor >= 10000 * masMenos && varAux[n].valor < 100000 * masMenos)
+                {
+                    cout << varAux[n].valor << "  ";
+                }
+                else
+                {
+                    cout << varAux[n].valor << " ";
+                }
+            }
+        }
+    }
+}
 
 void PruebaEscritori::mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int ultimo)
 {
     //imprimir
     for (int n = 0; n < ultimo; n++)
     {
-        cout << varAux[n].valor << "   ";
+        if (varAux[n].valor == -999999)
+        {
+            cout << "-"
+                 << "      ";
+        }
+        else
+        {
+            if (varAux[n].valor >= 0)
+            {
+                if (varAux[n].valor < 10 && varAux->valor >= 0)
+                {
+                    cout << varAux[n].valor << "      ";
+                }
+                else
+                {
+                    mostrarMostrarAuxOpDosPositivo(varAux, ultimo, true, n);
+                }
+            }
+            else
+            {
+                if (varAux[n].valor > -10 && varAux->valor < 0)
+                {
+                    cout << varAux[n].valor << "      ";
+                }
+                else
+                {
+                    mostrarMostrarAuxOpDosPositivo(varAux, ultimo, false, n);
+                }
+            }
+        }
     }
     cout << endl;
 }
@@ -113,7 +185,7 @@ void PruebaEscritori::mostrarBorrarAuxOpDos(variablesAuxiliares varAux[], tcad v
     {
 
         strcpy(varAux[m].variable, variables[m]);
-        varAux[m].valor = -999;
+        varAux[m].valor = -999999;
         varAux[m].existe = false;
     }
 }
@@ -188,7 +260,7 @@ void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
                         //imprimir variables (encabezado)
                         for (int l = 0; l < ultimo; l++)
                         {
-                            cout << varAux[l].variable << "   ";
+                            cout << varAux[l].variable << "      ";
                         }
                         cout << endl;
 
@@ -199,7 +271,7 @@ void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
                     {
                         if (strcmp(varAux[v].variable, auxValor->variable) == 0)
                         {
-                            if (varAux[v].existe == false)
+                            if (!varAux[v].existe)
                             {
                                 varAux[v].valor = auxValor->valor;
                                 varAux[v].existe = true;
@@ -213,9 +285,9 @@ void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
                             }
                         }
                     }
-                    mostrarMostrarAuxOpDos(varAux, ultimo);
-                    mostrarBorrarAuxOpDos(varAux, variables, ultimo);
                 }
+                mostrarMostrarAuxOpDos(varAux, ultimo);
+                mostrarBorrarAuxOpDos(varAux, variables, ultimo);
             }
         }
     }
