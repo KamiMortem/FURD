@@ -17,6 +17,13 @@ struct tlistaValor
     int contador;
 };
 
+struct variablesAuxiliares
+{
+    tcad variable;
+    float valor = -999;
+    bool existe = false;
+};
+
 class PruebaEscritori
 {
 private:
@@ -26,6 +33,8 @@ private:
     void crearValor(pvalor &nuevo, tlistaValor &lista);
     float buscarUltimoValor(tlistaValor lista, tcad variable);
     void mostrar(tlistaValor lista, int opcion);
+    void mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int ultimo);
+    void mostrarBorrarAuxOpDos(variablesAuxiliares varAux[], tcad variables[], int ultimo);
     void limpiarListaValor(tlistaValor &lista);
 
 public:
@@ -88,11 +97,32 @@ void PruebaEscritori::crearValor(pvalor &nuevo, tlistaValor &lista)
         cout << "MEMORIA INSUFICIENTE" << endl;
 }
 
+void PruebaEscritori::mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int ultimo)
+{
+    //imprimir
+    for (int n = 0; n < ultimo; n++)
+    {
+        cout << varAux[n].valor << "   ";
+    }
+    cout << endl;
+}
+void PruebaEscritori::mostrarBorrarAuxOpDos(variablesAuxiliares varAux[], tcad variables[], int ultimo)
+{
+    //borrar varAux
+    for (int m = 0; m < ultimo; m++)
+    {
+
+        strcpy(varAux[m].variable, variables[m]);
+        varAux[m].valor = -999;
+        varAux[m].existe = false;
+    }
+}
+
 void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
 {
-    pvalor i = NULL, auxValor = NULL;
+    pvalor i = NULL, auxValor = NULL, k = NULL;
     int ultimo;
-    tcad variables[20];
+    tcad variables[20], variableAnterior;
     float valores[20];
     bool banderaJ;
     if (lista.inicio != NULL)
@@ -100,7 +130,7 @@ void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
         ultimo = 0;
         for (i = lista.inicio; i != NULL; i = i->sig)
         {
-            if (opcion == 2)
+            if (opcion == 3)
             {
                 cout << i->variable << "= " << i->valor << endl;
             }
@@ -141,6 +171,52 @@ void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
             }
             cout << "............................." << endl;
             cout << "-----------------------------" << endl;
+        }
+        else
+        {
+            if (opcion == 2)
+            {
+                bool esPrimeroOpDos = true;
+                variablesAuxiliares varAux[ultimo];
+
+                for (auxValor = lista.inicio; auxValor != NULL; auxValor = auxValor->sig)
+                {
+                    if (esPrimeroOpDos)
+                    {
+                        mostrarBorrarAuxOpDos(varAux, variables, ultimo);
+
+                        //imprimir variables (encabezado)
+                        for (int l = 0; l < ultimo; l++)
+                        {
+                            cout << varAux[l].variable << "   ";
+                        }
+                        cout << endl;
+
+                        esPrimeroOpDos = false;
+                    }
+
+                    for (int v = 0; v < ultimo; v++)
+                    {
+                        if (strcmp(varAux[v].variable, auxValor->variable) == 0)
+                        {
+                            if (varAux[v].existe == false)
+                            {
+                                varAux[v].valor = auxValor->valor;
+                                varAux[v].existe = true;
+                            }
+                            else
+                            {
+                                mostrarMostrarAuxOpDos(varAux, ultimo);
+                                mostrarBorrarAuxOpDos(varAux, variables, ultimo);
+                                varAux[v].valor = auxValor->valor;
+                                varAux[v].existe = true;
+                            }
+                        }
+                    }
+                    mostrarMostrarAuxOpDos(varAux, ultimo);
+                    mostrarBorrarAuxOpDos(varAux, variables, ultimo);
+                }
+            }
         }
     }
     else
@@ -209,14 +285,14 @@ void PruebaEscritori::iniciar()
             do
             {
                 mostrar(lista, 1);
-                cout << "Desea agregar un nuevo valor?   0:NO   1:SI   2:Mostrar Todo" << endl;
+                cout << "Desea agregar un nuevo valor?   0:NO   1:SI   2:Mostrar Todo   3:Mostrar Por Ingreso" << endl;
                 cin >> opcion;
-                if (opcion == 2)
+                if (opcion != 0 && opcion != 1)
                 {
-                    mostrar(lista, 2);
+                    mostrar(lista, opcion);
                 }
             } while (opcion != 0 && opcion != 1);
-        } while (opcion != 0 && opcion != 1 && opcion != 2);
+        } while (opcion != 0 && opcion != 1 && opcion != 2 && opcion != 3);
     } while (opcion != 0);
     cout << "-----------------------------" << endl;
     mostrar(lista, 1);
