@@ -35,7 +35,8 @@ private:
     float buscarUltimoValor(tlistaValor lista, tcad variable);
     void mostrar(tlistaValor lista, int opcion);
     void mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int ultimo);
-    void mostrarMostrarAuxOpDosPositivo(variablesAuxiliares varAux[], int ultimo, bool positivo, int n);
+    void mostrarMostrarAuxOpDosPositivo(variablesAuxiliares varAux[], int ultimo, int n);
+    void mostrarMostrarAuxOpDosNegativo(variablesAuxiliares varAux[], int ultimo, int n);
     void mostrarBorrarAuxOpDos(variablesAuxiliares varAux[], tcad variables[], int ultimo);
     void limpiarListaValor(tlistaValor &lista);
     void sumarVariable(tlistaValor &lista, pvalor &nuevo);
@@ -104,37 +105,63 @@ void PruebaEscritori::crearValor(pvalor &nuevo, tlistaValor &lista)
     else
         cout << "MEMORIA INSUFICIENTE" << endl;
 }
-void PruebaEscritori::mostrarMostrarAuxOpDosPositivo(variablesAuxiliares varAux[], int ultimo, bool positivo, int n)
-{
-    int masMenos = 1;
-    if (positivo)
-    {
-        masMenos = 1;
-    }
-    else
-    {
-        masMenos = -1;
-    }
 
-    if (varAux[n].valor >= 10 * masMenos && varAux[n].valor < 100 * masMenos)
+void PruebaEscritori::mostrarMostrarAuxOpDosNegativo(variablesAuxiliares varAux[], int ultimo, int n)
+{
+
+    if (varAux[n].valor <= -10 && varAux[n].valor > -100)
     {
         cout << varAux[n].valor << "      ";
     }
     else
     {
-        if (varAux[n].valor >= 100 * masMenos && varAux[n].valor < 1000 * masMenos)
+        if (varAux[n].valor <= -100 && varAux[n].valor > -1000)
         {
             cout << varAux[n].valor << "     ";
         }
         else
         {
-            if (varAux[n].valor >= 1000 * masMenos && varAux[n].valor < 10000 * masMenos)
+            if (varAux[n].valor <= -1000 && varAux[n].valor > -10000)
             {
                 cout << varAux[n].valor << "    ";
             }
             else
             {
-                if (varAux[n].valor >= 10000 * masMenos && varAux[n].valor < 100000 * masMenos)
+                if (varAux[n].valor <= -10000 && varAux[n].valor > -100000)
+                {
+                    cout << varAux[n].valor << "   ";
+                }
+                else
+                {
+                    cout << varAux[n].valor << "  ";
+                }
+            }
+        }
+    }
+}
+
+void PruebaEscritori::mostrarMostrarAuxOpDosPositivo(variablesAuxiliares varAux[], int ultimo, int n)
+{
+
+    if (varAux[n].valor >= 10 && varAux[n].valor < 100)
+    {
+        cout << varAux[n].valor << "      ";
+    }
+    else
+    {
+        if (varAux[n].valor >= 100 && varAux[n].valor < 1000)
+        {
+            cout << varAux[n].valor << "     ";
+        }
+        else
+        {
+            if (varAux[n].valor >= 1000 && varAux[n].valor < 10000)
+            {
+                cout << varAux[n].valor << "    ";
+            }
+            else
+            {
+                if (varAux[n].valor >= 10000 && varAux[n].valor < 100000)
                 {
                     cout << varAux[n].valor << "   ";
                 }
@@ -167,7 +194,7 @@ void PruebaEscritori::mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int u
                 }
                 else
                 {
-                    mostrarMostrarAuxOpDosPositivo(varAux, ultimo, true, n);
+                    mostrarMostrarAuxOpDosPositivo(varAux, ultimo, n);
                 }
             }
             else
@@ -178,13 +205,14 @@ void PruebaEscritori::mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int u
                 }
                 else
                 {
-                    mostrarMostrarAuxOpDosPositivo(varAux, ultimo, false, n);
+                    mostrarMostrarAuxOpDosNegativo(varAux, ultimo, n);
                 }
             }
         }
     }
     cout << endl;
 }
+
 void PruebaEscritori::mostrarBorrarAuxOpDos(variablesAuxiliares varAux[], tcad variables[], int ultimo)
 {
     //borrar varAux
@@ -267,7 +295,7 @@ void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
                         //imprimir variables (encabezado)
                         for (int l = 0; l < ultimo; l++)
                         {
-                            cout << varAux[l].variable << "      ";
+                            cout << varAux[l].variable << "       ";
                         }
                         cout << endl;
 
@@ -421,6 +449,7 @@ void PruebaEscritori::modVariable(tlistaValor &lista, pvalor &nuevo)
         cout << "MEMORIA INSUFICIENTE" << endl;
     agregarFinal(lista, nuevo);
 }
+
 void PruebaEscritori::potenciaVariable(tlistaValor &lista, pvalor &nuevo)
 {
     nuevo = new tvalor;
