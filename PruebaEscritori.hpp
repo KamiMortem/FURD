@@ -1,4 +1,5 @@
 #include <cstring>
+#include <math.h>
 
 typedef char tcad[30];
 
@@ -37,6 +38,12 @@ private:
     void mostrarMostrarAuxOpDosPositivo(variablesAuxiliares varAux[], int ultimo, bool positivo, int n);
     void mostrarBorrarAuxOpDos(variablesAuxiliares varAux[], tcad variables[], int ultimo);
     void limpiarListaValor(tlistaValor &lista);
+    void sumarVariable(tlistaValor &lista, pvalor &nuevo);
+    void restarVariable(tlistaValor &lista, pvalor &nuevo);
+    void multiplicarVariable(tlistaValor &lista, pvalor &nuevo);
+    void dividirVariable(tlistaValor &lista, pvalor &nuevo);
+    void modVariable(tlistaValor &lista, pvalor &nuevo);
+    void potenciaVariable(tlistaValor &lista, pvalor &nuevo);
 
 public:
     PruebaEscritori(/* args */);
@@ -111,29 +118,29 @@ void PruebaEscritori::mostrarMostrarAuxOpDosPositivo(variablesAuxiliares varAux[
 
     if (varAux[n].valor >= 10 * masMenos && varAux[n].valor < 100 * masMenos)
     {
-        cout << varAux[n].valor << "     ";
+        cout << varAux[n].valor << "      ";
     }
     else
     {
         if (varAux[n].valor >= 100 * masMenos && varAux[n].valor < 1000 * masMenos)
         {
-            cout << varAux[n].valor << "    ";
+            cout << varAux[n].valor << "     ";
         }
         else
         {
             if (varAux[n].valor >= 1000 * masMenos && varAux[n].valor < 10000 * masMenos)
             {
-                cout << varAux[n].valor << "   ";
+                cout << varAux[n].valor << "    ";
             }
             else
             {
                 if (varAux[n].valor >= 10000 * masMenos && varAux[n].valor < 100000 * masMenos)
                 {
-                    cout << varAux[n].valor << "  ";
+                    cout << varAux[n].valor << "   ";
                 }
                 else
                 {
-                    cout << varAux[n].valor << " ";
+                    cout << varAux[n].valor << "  ";
                 }
             }
         }
@@ -156,7 +163,7 @@ void PruebaEscritori::mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int u
             {
                 if (varAux[n].valor < 10 && varAux->valor >= 0)
                 {
-                    cout << varAux[n].valor << "      ";
+                    cout << varAux[n].valor << "       ";
                 }
                 else
                 {
@@ -167,7 +174,7 @@ void PruebaEscritori::mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int u
             {
                 if (varAux[n].valor > -10 && varAux->valor < 0)
                 {
-                    cout << varAux[n].valor << "      ";
+                    cout << varAux[n].valor << "       ";
                 }
                 else
                 {
@@ -297,6 +304,146 @@ void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
     }
 }
 
+void PruebaEscritori::sumarVariable(tlistaValor &lista, pvalor &nuevo)
+{
+    nuevo = new tvalor;
+    tcad variableOperacion;
+    if (nuevo != NULL)
+    {
+        cout << "Ingrese variable: ";
+        cin >> nuevo->variable;
+        if (lista.final != NULL)
+        {
+            cout << "ultimo valor: " << buscarUltimoValor(lista, nuevo->variable) << endl;
+        }
+
+        cout << "Ingrese variable a sumar " << nuevo->variable << ": ";
+        cin >> variableOperacion;
+        nuevo->valor = buscarUltimoValor(lista, nuevo->variable) + buscarUltimoValor(lista, variableOperacion);
+        nuevo->sig = NULL;
+    }
+    else
+        cout << "MEMORIA INSUFICIENTE" << endl;
+    agregarFinal(lista, nuevo);
+}
+
+void PruebaEscritori::restarVariable(tlistaValor &lista, pvalor &nuevo)
+{
+    nuevo = new tvalor;
+    tcad variableOperacion;
+    if (nuevo != NULL)
+    {
+        cout << "Ingrese variable: ";
+        cin >> nuevo->variable;
+        if (lista.final != NULL)
+        {
+            cout << "ultimo valor: " << buscarUltimoValor(lista, nuevo->variable) << endl;
+        }
+
+        cout << "Ingrese variable a restar " << nuevo->variable << ": ";
+        cin >> variableOperacion;
+        nuevo->valor = buscarUltimoValor(lista, nuevo->variable) - buscarUltimoValor(lista, variableOperacion);
+        nuevo->sig = NULL;
+    }
+    else
+        cout << "MEMORIA INSUFICIENTE" << endl;
+    agregarFinal(lista, nuevo);
+}
+
+void PruebaEscritori::multiplicarVariable(tlistaValor &lista, pvalor &nuevo)
+{
+    nuevo = new tvalor;
+    tcad variableOperacion;
+    if (nuevo != NULL)
+    {
+        cout << "Ingrese variable: ";
+        cin >> nuevo->variable;
+        if (lista.final != NULL)
+        {
+            cout << "ultimo valor: " << buscarUltimoValor(lista, nuevo->variable) << endl;
+        }
+
+        cout << "Ingrese variable a multiplicar " << nuevo->variable << ": ";
+        cin >> variableOperacion;
+        nuevo->valor = buscarUltimoValor(lista, nuevo->variable) * buscarUltimoValor(lista, variableOperacion);
+        nuevo->sig = NULL;
+    }
+    else
+        cout << "MEMORIA INSUFICIENTE" << endl;
+    agregarFinal(lista, nuevo);
+}
+
+void PruebaEscritori::dividirVariable(tlistaValor &lista, pvalor &nuevo)
+{
+    nuevo = new tvalor;
+    tcad variableOperacion;
+    if (nuevo != NULL)
+    {
+        cout << "Ingrese variable: ";
+        cin >> nuevo->variable;
+        if (lista.final != NULL)
+        {
+            cout << "ultimo valor: " << buscarUltimoValor(lista, nuevo->variable) << endl;
+        }
+
+        cout << "Ingrese variable a dividir " << nuevo->variable << ": ";
+        cin >> variableOperacion;
+        nuevo->valor = buscarUltimoValor(lista, nuevo->variable) / buscarUltimoValor(lista, variableOperacion);
+        nuevo->sig = NULL;
+    }
+    else
+        cout << "MEMORIA INSUFICIENTE" << endl;
+    agregarFinal(lista, nuevo);
+}
+
+void PruebaEscritori::modVariable(tlistaValor &lista, pvalor &nuevo)
+{
+    nuevo = new tvalor;
+    tcad variableOperacion;
+    int variable1, variable2;
+    if (nuevo != NULL)
+    {
+        cout << "Ingrese variable: ";
+        cin >> nuevo->variable;
+        if (lista.final != NULL)
+        {
+            cout << "ultimo valor: " << buscarUltimoValor(lista, nuevo->variable) << endl;
+        }
+
+        cout << "Ingrese variable a mod " << nuevo->variable << ": ";
+        cin >> variableOperacion;
+        variable1 = buscarUltimoValor(lista, nuevo->variable);
+        variable2 = buscarUltimoValor(lista, variableOperacion);
+        nuevo->valor = variable1 % variable2;
+        nuevo->sig = NULL;
+    }
+    else
+        cout << "MEMORIA INSUFICIENTE" << endl;
+    agregarFinal(lista, nuevo);
+}
+void PruebaEscritori::potenciaVariable(tlistaValor &lista, pvalor &nuevo)
+{
+    nuevo = new tvalor;
+    tcad variableOperacion;
+    if (nuevo != NULL)
+    {
+        cout << "Ingrese variable: ";
+        cin >> nuevo->variable;
+        if (lista.final != NULL)
+        {
+            cout << "ultimo valor: " << buscarUltimoValor(lista, nuevo->variable) << endl;
+        }
+
+        cout << "Ingrese variable a potenciar " << nuevo->variable << ": ";
+        cin >> variableOperacion;
+        nuevo->valor = pow(buscarUltimoValor(lista, nuevo->variable), buscarUltimoValor(lista, variableOperacion));
+        nuevo->sig = NULL;
+    }
+    else
+        cout << "MEMORIA INSUFICIENTE" << endl;
+    agregarFinal(lista, nuevo);
+}
+
 void PruebaEscritori::limpiarListaValor(tlistaValor &lista)
 {
     pvalor val, i;
@@ -357,11 +504,38 @@ void PruebaEscritori::iniciar()
             do
             {
                 mostrar(lista, 1);
-                cout << "Desea agregar un nuevo valor?   0:NO   1:SI   2:Mostrar Todo   3:Mostrar Por Ingreso" << endl;
+                cout << "Desea agregar un nuevo valor? 0:NO   1:SI   2:Mostrar_Todo   3:Mostrar_Por_Ingreso " << endl
+                     << "                              4:Sumar_otra_variable   5:Restar_otra_variable " << endl
+                     << "                              6:Multiplicar_otra_variable   7:Dividir_otra_variable " << endl
+                     << "                              8:MOD_otra_variable   9:potencia_otra_variable " << endl;
                 cin >> opcion;
-                if (opcion != 0 && opcion != 1)
+                if (opcion == 2 || opcion == 3)
                 {
                     mostrar(lista, opcion);
+                }
+                else
+                {
+                    switch (opcion)
+                    {
+                    case 4:
+                        sumarVariable(lista, nuevo);
+                        break;
+                    case 5:
+                        restarVariable(lista, nuevo);
+                        break;
+                    case 6:
+                        multiplicarVariable(lista, nuevo);
+                        break;
+                    case 7:
+                        dividirVariable(lista, nuevo);
+                        break;
+                    case 8:
+                        modVariable(lista, nuevo);
+                        break;
+                    case 9:
+                        potenciaVariable(lista, nuevo);
+                        break;
+                    }
                 }
             } while (opcion != 0 && opcion != 1);
         } while (opcion != 0 && opcion != 1 && opcion != 2 && opcion != 3);
