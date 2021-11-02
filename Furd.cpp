@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <limits>
 #include "Hora.hpp"
 #include "Algebraico.hpp"
 #include "PruebaEscritori.hpp"
@@ -19,7 +20,24 @@ void obtenerNumeroAleatorio()
     int max, numRandom;
     srand((unsigned)time(0));
     cout << "Ingrese un valor maximo" << endl;
-    cin >> max;
+    do
+    {
+        try
+        {
+            cin >> max;
+            if (!cin.good())
+            {
+                cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                throw 125;
+            }
+        }
+        catch (int)
+        {
+            cout << "Ingreso un valor NO valido, ingrese nuevamente" << endl;
+            max = -100;
+        }
+    } while (max < 0);
     cout << endl;
     numRandom = (rand() % max) + 1;
     cout << "El numero random entre 1 y " << max << " es:" << numRandom << endl
@@ -33,14 +51,60 @@ Hora insertarHora(tcad mensaje)
          << "* Ingrese Primero hora, luego minuto y al final segundo. Si quiere ingresarlo en una sola linea, separelos con un +" << endl
          << endl;
     cout << mensaje << endl;
-    cin >> hora1;
     do
     {
-        cin >> minuto1;
+        try
+        {
+            cin >> hora1;
+            if (!cin.good())
+            {
+                cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                throw 125;
+            }
+        }
+        catch (int)
+        {
+            cout << "Ingreso un valor NO valido, ingrese nuevamente" << endl;
+            hora1 = -100;
+        }
+    } while (hora1 < 0);
+
+    do
+    {
+        try
+        {
+            cin >> minuto1;
+            if (!cin.good())
+            {
+                cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                throw 125;
+            }
+        }
+        catch (int)
+        {
+            cout << "Ingreso un valor NO valido, ingrese nuevamente" << endl;
+            minuto1 = 100;
+        }
     } while (minuto1 > 60);
     do
     {
-        cin >> segundo1;
+        try
+        {
+            cin >> segundo1;
+            if (!cin.good())
+            {
+                cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                throw 125;
+            }
+        }
+        catch (int)
+        {
+            cout << "Ingreso un valor NO valido, ingrese nuevamente" << endl;
+            segundo1 = 100;
+        }
     } while (segundo1 > 60);
 
     cout << endl
@@ -101,17 +165,33 @@ void reglaTresSimple()
 /* Menu principal */
 int menu(int &opcion)
 {
-    cout << "-----------------------------------------------------------------" << endl;
-    cout << "1- Dividir hora" << endl;
-    cout << "2- Sumar Horas" << endl;
-    cout << "3- Restar Horas" << endl;
-    cout << "4- Regla de 3 simples" << endl;
-    cout << "5- Regla de 3 inversa" << endl;
-    cout << "7- Obtener numero random" << endl;
-    cout << "8- Prueba de escritorio" << endl;
-    cout << "10- Salir" << endl;
-    cout << "-----------------------------------------------------------------" << endl;
-    cin >> opcion;
+    try
+    {
+        cout << "-----------------------------------------------------------------" << endl;
+        cout << "1- Dividir hora" << endl;
+        cout << "2- Sumar Horas" << endl;
+        cout << "3- Restar Horas" << endl;
+        cout << "4- Regla de 3 simples" << endl;
+        cout << "5- Regla de 3 inversa" << endl;
+        cout << "7- Obtener numero random" << endl;
+        cout << "8- Prueba de escritorio" << endl;
+        cout << "10- Salir" << endl;
+        cout << "-----------------------------------------------------------------" << endl;
+        cin >> opcion;
+
+        if (!cin.good())
+        {
+            cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            throw 125;
+        }
+    }
+    catch (int)
+    {
+        cout << "Ingreso un valor NO valido" << endl;
+        opcion = 0;
+        return 0;
+    }
     return opcion;
 }
 
