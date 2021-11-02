@@ -4,6 +4,7 @@
 #include "Hora.hpp"
 #include "Algebraico.hpp"
 #include "PruebaEscritori.hpp"
+#include "Sistema.hpp"
 
 using namespace std;
 
@@ -176,6 +177,12 @@ void reglaTresSimple()
     alg.reglaDeTresSimple();
 }
 
+void actualizarSistema()
+{
+    Sistema sis;
+    sis.actualizarSistema();
+}
+
 /* Menu principal */
 int menu(int &opcion)
 {
@@ -190,7 +197,8 @@ int menu(int &opcion)
         cout << "7- Obtener numero random" << endl;
         cout << "8- Prueba de escritorio" << endl;
         cout << "9- Obtener el MCM y MCD" << endl;
-        cout << "10- Salir" << endl;
+        cout << "10- Actualizar sistema" << endl;
+        cout << "15- Salir" << endl;
         cout << "-----------------------------------------------------------------" << endl;
         cin >> opcion;
 
@@ -243,11 +251,14 @@ int main(int argc, char *argv[])
             obtenerMCMyMCD();
             break;
         case 10:
+            actualizarSistema();
+            break;
+        case 15:
             cout << "Gracias por usar el programa" << endl;
             break;
         default:
             cout << "Se equivoco de comando, escribalo nuevamente" << endl;
             break;
         }
-    } while (opcion != 10);
+    } while (opcion != 15);
 }
