@@ -4,8 +4,11 @@ _FURD = Funciones utiles rapidas y diarias. Es un proyecto Open Source, que esta
 * Dividir el tiempo en partes iguales 
 * suma y restas de horas
 * Obtener 1 numero aleatorio en un rango establecido
-* Regla de 3 simple 
+* Regla de 3 simple y inverso
 * Prueba de escritorio
+* Obtener MCM y MCD
+* Actualizar tu sistema Linux
+* llamar a la calculadora del sistema
 
 ## Comenzando 🚀
 

@@ -177,6 +177,12 @@ void reglaTresSimple()
     alg.reglaDeTresSimple();
 }
 
+void calculadora()
+{
+    Sistema sis;
+    sis.calculadora();
+}
+
 void actualizarSistema()
 {
     Sistema sis;
@@ -198,6 +204,7 @@ int menu(int &opcion)
         cout << "8- Prueba de escritorio" << endl;
         cout << "9- Obtener el MCM y MCD" << endl;
         cout << "10- Actualizar sistema" << endl;
+        cout << "11- Calculadora del sistema" << endl;
         cout << "15- Salir" << endl;
         cout << "-----------------------------------------------------------------" << endl;
         cin >> opcion;
@@ -252,6 +259,9 @@ int main(int argc, char *argv[])
             break;
         case 10:
             actualizarSistema();
+            break;
+        case 11:
+            calculadora();
             break;
         case 15:
             cout << "Gracias por usar el programa" << endl;

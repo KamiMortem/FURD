@@ -6,6 +6,7 @@ public:
     Sistema(/* args */);
     ~Sistema();
     void actualizarSistema();
+    void calculadora();
 };
 
 Sistema::Sistema(/* args */)
@@ -48,5 +49,8 @@ void Sistema::actualizarSistema()
         system("yay -Syua");
         system("sudo snap refresh");
     }
-    
+}
+
+void Sistema::calculadora(){
+    system("calc");
 }
