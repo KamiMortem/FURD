@@ -86,11 +86,18 @@ void sumarRestarHora(bool sumar)
     cout << " " << horaAux.getHora() << ":" << horaAux.getMinutos() << ":" << horaAux.getSegundos() << endl;
 }
 
+void reglaTresInversa()
+{
+    Algebraico alg;
+    alg.reglaDeTresInversa();
+}
+
 void reglaTresSimple()
 {
     Algebraico alg;
     alg.reglaDeTresSimple();
 }
+
 /* Menu principal */
 int menu(int &opcion)
 {
@@ -99,8 +106,9 @@ int menu(int &opcion)
     cout << "2- Sumar Horas" << endl;
     cout << "3- Restar Horas" << endl;
     cout << "4- Regla de 3 simples" << endl;
-    cout << "5- Obtener numero random" << endl;
-    cout << "6- Prueba de escritorio" << endl;
+    cout << "5- Regla de 3 inversa" << endl;
+    cout << "7- Obtener numero random" << endl;
+    cout << "8- Prueba de escritorio" << endl;
     cout << "10- Salir" << endl;
     cout << "-----------------------------------------------------------------" << endl;
     cin >> opcion;
@@ -128,9 +136,12 @@ int main(int argc, char *argv[])
             reglaTresSimple();
             break;
         case 5:
+            reglaTresInversa();
+            break;
+        case 7:
             obtenerNumeroAleatorio();
             break;
-        case 6:
+        case 8:
             pruebaDeEscritorio();
             break;
         case 10:

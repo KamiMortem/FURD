@@ -5,11 +5,13 @@ using namespace std;
 class Algebraico
 {
 private:
-     /* data */
+     void reglaDeTresSimpleInversa(float &num1, float &num2, float &num3);
+
 public:
      Algebraico(/* args */);
      ~Algebraico();
      void reglaDeTresSimple();
+     void reglaDeTresInversa();
 };
 
 Algebraico::Algebraico(/* args */)
@@ -20,9 +22,8 @@ Algebraico::~Algebraico()
 {
 }
 
-void Algebraico::reglaDeTresSimple()
+void Algebraico::reglaDeTresSimpleInversa(float &num1, float &num2, float &num3)
 {
-     float num1, num2, num3;
      cout << "Inserte el 1er numero:";
      cin >> num1;
      cout << endl;
@@ -49,6 +50,19 @@ void Algebraico::reglaDeTresSimple()
      cout << endl;
      cout << "El valor del 4to numero es:" << (num3 * num2) / num1 << endl;
      cout << num1 << "     ->     " << num2 << endl;
-     cout << num3 << "     ->     "
-          << "X=" << (num3 * num2) / num1 << endl;
+     cout << num3 << "     ->     ";
+}
+
+void Algebraico::reglaDeTresSimple()
+{
+     float num1, num2, num3;
+     reglaDeTresSimpleInversa(num1, num2, num3);
+     cout << "X=" << (num3 * num2) / num1 << endl;
+}
+
+void Algebraico::reglaDeTresInversa()
+{
+     float num1, num2, num3;
+     reglaDeTresSimpleInversa(num1, num2, num3);
+     cout << "X=" << (num1 * num2) / num3 << endl;
 }
