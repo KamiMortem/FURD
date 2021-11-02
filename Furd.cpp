@@ -150,6 +150,20 @@ void sumarRestarHora(bool sumar)
     cout << " " << horaAux.getHora() << ":" << horaAux.getMinutos() << ":" << horaAux.getSegundos() << endl;
 }
 
+void obtenerMCMyMCD()
+{
+    int num1, num2;
+    Algebraico alg;
+    cout << "Ingrese el primer numero: ";
+    cin >> num1;
+    cout << endl
+         << "Ingrese el segundo numero: ";
+    cin >> num2;
+    cout << endl
+         << "El MCD entre " << num1 << " y " << num2 << " es: " << alg.mcd(num1, num2) << endl;
+    cout << "El MCM entre " << num1 << " y " << num2 << " es: " << alg.mcm(num1, num2) << endl;
+}
+
 void reglaTresInversa()
 {
     Algebraico alg;
@@ -175,6 +189,7 @@ int menu(int &opcion)
         cout << "5- Regla de 3 inversa" << endl;
         cout << "7- Obtener numero random" << endl;
         cout << "8- Prueba de escritorio" << endl;
+        cout << "9- Obtener el MCM y MCD" << endl;
         cout << "10- Salir" << endl;
         cout << "-----------------------------------------------------------------" << endl;
         cin >> opcion;
@@ -223,6 +238,9 @@ int main(int argc, char *argv[])
             break;
         case 8:
             pruebaDeEscritorio();
+            break;
+        case 9:
+            obtenerMCMyMCD();
             break;
         case 10:
             cout << "Gracias por usar el programa" << endl;

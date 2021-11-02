@@ -12,6 +12,8 @@ public:
      ~Algebraico();
      void reglaDeTresSimple();
      void reglaDeTresInversa();
+     int mcm(int num1, int num2);
+     int mcd(int num1, int num2);
 };
 
 Algebraico::Algebraico(/* args */)
@@ -65,4 +67,27 @@ void Algebraico::reglaDeTresInversa()
      float num1, num2, num3;
      reglaDeTresSimpleInversa(num1, num2, num3);
      cout << "X=" << (num1 * num2) / num3 << endl;
+}
+
+int Algebraico::mcd(int num1, int num2)
+{
+     int result = 0;
+     int a = max(num1, num2);
+     int b = min(num1, num2);
+     do
+     {
+          result = b;
+          b = a % b;
+          a = result;
+     } while (b != 0);
+     return result;
+}
+
+int Algebraico::mcm(int num1, int num2)
+{
+     int result = 0;
+     int a = max(num1, num2);
+     int b = min(num1, num2);
+     result = (a / mcd(a, b)) * b;
+     return result;
 }
