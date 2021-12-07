@@ -176,7 +176,7 @@ void PruebaEscritori::mostrarMostrarAuxOpDosPositivo(variablesAuxiliares varAux[
 
 void PruebaEscritori::mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int ultimo)
 {
-    //imprimir
+    // imprimir
     for (int n = 0; n < ultimo; n++)
     {
         if (varAux[n].valor == -999999)
@@ -215,7 +215,7 @@ void PruebaEscritori::mostrarMostrarAuxOpDos(variablesAuxiliares varAux[], int u
 
 void PruebaEscritori::mostrarBorrarAuxOpDos(variablesAuxiliares varAux[], tcad variables[], int ultimo)
 {
-    //borrar varAux
+    // borrar varAux
     for (int m = 0; m < ultimo; m++)
     {
 
@@ -292,7 +292,7 @@ void PruebaEscritori::mostrar(tlistaValor lista, int opcion)
                     {
                         mostrarBorrarAuxOpDos(varAux, variables, ultimo);
 
-                        //imprimir variables (encabezado)
+                        // imprimir variables (encabezado)
                         for (int l = 0; l < ultimo; l++)
                         {
                             cout << varAux[l].variable << "       ";
@@ -405,6 +405,7 @@ void PruebaEscritori::dividirVariable(tlistaValor &lista, pvalor &nuevo)
 {
     nuevo = new tvalor;
     tcad variableOperacion;
+    float variableDividendo;
     if (nuevo != NULL)
     {
         cout << "Ingrese variable: ";
@@ -416,12 +417,17 @@ void PruebaEscritori::dividirVariable(tlistaValor &lista, pvalor &nuevo)
 
         cout << "Ingrese variable a dividir " << nuevo->variable << ": ";
         cin >> variableOperacion;
-        nuevo->valor = buscarUltimoValor(lista, nuevo->variable) / buscarUltimoValor(lista, variableOperacion);
+        variableDividendo = buscarUltimoValor(lista, variableOperacion);
+        if (variableDividendo != 0)
+            nuevo->valor = buscarUltimoValor(lista, nuevo->variable) / variableDividendo;
         nuevo->sig = NULL;
     }
     else
         cout << "MEMORIA INSUFICIENTE" << endl;
-    agregarFinal(lista, nuevo);
+    if (variableDividendo != 0)
+        agregarFinal(lista, nuevo);
+    else
+        cout << "No se puede dividir por 0" << endl;
 }
 
 void PruebaEscritori::modVariable(tlistaValor &lista, pvalor &nuevo)

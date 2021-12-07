@@ -194,18 +194,14 @@ int menu(int &opcion)
 {
     try
     {
-        cout << "-----------------------------------------------------------------" << endl;
-        cout << "1- Dividir hora" << endl;
-        cout << "2- Sumar Horas" << endl;
-        cout << "3- Restar Horas" << endl;
-        cout << "4- Regla de 3 simples" << endl;
-        cout << "5- Regla de 3 inversa" << endl;
-        cout << "7- Obtener numero random" << endl;
-        cout << "8- Prueba de escritorio" << endl;
-        cout << "9- Obtener el MCM y MCD" << endl;
-        cout << "10- Actualizar sistema" << endl;
-        cout << "11- Calculadora del sistema" << endl;
-        cout << "15- Salir" << endl;
+        cout << "----------------------------FURD----------------------------------" << endl;
+        cout << " 1- Dividir hora                  9- Obtener el MCM y MCD" << endl;
+        cout << " 2- Sumar Horas                  10- Actualizar sistema" << endl;
+        cout << " 3- Restar Horas                 11- Calculadora del sistema" << endl;
+        cout << " 4- Regla de 3 simples           12- limpiar pantalla" << endl;
+        cout << " 5- Regla de 3 inversa           13- " << endl;
+        cout << " 7- Obtener numero random        14- " << endl;
+        cout << " 8- Prueba de escritorio         15- Salir" << endl;
         cout << "-----------------------------------------------------------------" << endl;
         cin >> opcion;
 
@@ -262,6 +258,9 @@ int main(int argc, char *argv[])
             break;
         case 11:
             calculadora();
+            break;
+        case 12:
+            system("clear");
             break;
         case 15:
             cout << "Gracias por usar el programa" << endl;
