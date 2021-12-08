@@ -123,8 +123,13 @@ void dividirHoras()
     cout << "Ingrese la cantidad de veces que lo quiere dividir: ";
     cin >> divisor;
     horaDividir = horaDividir.dividirHora(divisor);
-    cout << "El resultado es:" << endl;
-    cout << " " << horaDividir.getHora() << ":" << horaDividir.getMinutos() << ":" << horaDividir.getSegundos() << endl;
+    if (!horaDividir.esCero())
+    {
+        cout << "El resultado es:" << endl;
+        cout << " " << horaDividir.getHora() << ":" << horaDividir.getMinutos() << ":" << horaDividir.getSegundos() << endl;
+    }
+    else
+        cout << "No se puede dividir por 0..." << endl;
 }
 
 void sumarRestarHora(bool sumar)
@@ -194,15 +199,16 @@ int menu(int &opcion)
 {
     try
     {
-        cout << "----------------------------FURD----------------------------------" << endl;
-        cout << " 1- Dividir hora                  9- Obtener el MCM y MCD" << endl;
-        cout << " 2- Sumar Horas                  10- Actualizar sistema" << endl;
-        cout << " 3- Restar Horas                 11- Calculadora del sistema" << endl;
-        cout << " 4- Regla de 3 simples           12- limpiar pantalla" << endl;
-        cout << " 5- Regla de 3 inversa           13- " << endl;
-        cout << " 7- Obtener numero random        14- " << endl;
-        cout << " 8- Prueba de escritorio         15- Salir" << endl;
-        cout << "-----------------------------------------------------------------" << endl;
+        cout << "-----------------------------< FURD >-----------------------------" << endl;
+        cout << " 1- Dividir hora                     9- Obtener el MCM y MCD" << endl;
+        cout << " 2- Sumar horas                     10- Actualizar sistema" << endl;
+        cout << " 3- Restar horas                    11- Calculadora del sistema" << endl;
+        cout << " 4- Regla de 3 simples              12- Limpiar pantalla" << endl;
+        cout << " 5- Regla de 3 inversa              13- " << endl;
+        cout << " 7- Obtener numero random           14- " << endl;
+        cout << " 8- PRUEBA DE ESCRITORIO            15- Salir" << endl;
+        cout << "------------------------------------------------------------------" << endl;
+        cout << "Opcion: ";
         cin >> opcion;
 
         if (!cin.good())
@@ -261,6 +267,12 @@ int main(int argc, char *argv[])
             break;
         case 12:
             system("clear");
+            break;
+        case 13:
+            cout << "En construccion" << endl;
+            break;
+        case 14:
+            cout << "En construccion" << endl;
             break;
         case 15:
             cout << "Gracias por usar el programa" << endl;

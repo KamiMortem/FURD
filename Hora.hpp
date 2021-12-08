@@ -23,6 +23,8 @@ public:
     Hora dividirHora(int divisor);
     Hora sumarHora(Hora horOper);
     Hora restarHora(Hora horOper);
+
+    bool esCero();
 };
 
 Hora::Hora(int hora, int minuto, int segundos)
@@ -57,16 +59,20 @@ void Hora::convertirTodoSegundos()
 Hora Hora::dividirHora(int divisor)
 {
     int hor, min, seg, tot;
+    if (divisor != 0)
+    {
+        tot = this->horaTotalSegundos / divisor;
 
-    tot = this->horaTotalSegundos / divisor;
+        hor = tot / 3600;
+        min = (tot % 3600) / 60;
+        seg = ((tot % 3600) % 60);
 
-    hor = tot / 3600;
-    min = (tot % 3600) / 60;
-    seg = ((tot % 3600) % 60);
+        Hora horaAux(hor, min, seg);
 
-    Hora horaAux(hor, min, seg);
-
-    return horaAux;
+        return horaAux;
+    }
+    Hora horaAuxA(0, 0, 0);
+    return horaAuxA;
 }
 
 Hora Hora::sumarHora(Hora horOper)
@@ -95,4 +101,11 @@ Hora Hora::restarHora(Hora horOper)
 
     Hora horaTotal(hor, min, seg);
     return horaTotal;
+}
+
+bool Hora::esCero()
+{
+    if (this->hora == 0 && this->minutos == 0 && this->segundos == 0)
+        return true;
+    return false;
 }
