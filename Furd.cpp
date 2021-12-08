@@ -199,15 +199,13 @@ int menu(int &opcion)
 {
     try
     {
-        cout << "-----------------------------< FURD >-----------------------------" << endl;
-        cout << " 1- Dividir hora                     9- Obtener el MCM y MCD" << endl;
-        cout << " 2- Sumar horas                     10- Actualizar sistema" << endl;
-        cout << " 3- Restar horas                    11- Calculadora del sistema" << endl;
-        cout << " 4- Regla de 3 simples              12- Limpiar pantalla" << endl;
-        cout << " 5- Regla de 3 inversa              13- " << endl;
-        cout << " 7- Obtener numero random           14- " << endl;
-        cout << " 8- PRUEBA DE ESCRITORIO            15- Salir" << endl;
-        cout << "------------------------------------------------------------------" << endl;
+        cout << "-----------------------------------< FURD >-----------------------------------" << endl;
+        cout << " 1- Dividir hora          6- Obtener numero random     11- Limpiar pantalla " << endl;
+        cout << " 2- Sumar horas           7- PRUEBA DE ESCRITORIO      12- Graficar Funciones " << endl;
+        cout << " 3- Restar horas          8- Obtener el MCM y MCD      13- Criptograficas " << endl;
+        cout << " 4- Regla de 3 simples    9- Actualizar sistema        14- " << endl;
+        cout << " 5- Regla de 3 inversa   10- Calculadora del sistema   15- Salir " << endl;
+        cout << "------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
         cin >> opcion;
 
@@ -250,26 +248,29 @@ int main(int argc, char *argv[])
         case 5:
             reglaTresInversa();
             break;
-        case 7:
+        case 6:
             obtenerNumeroAleatorio();
             break;
-        case 8:
+        case 7:
             pruebaDeEscritorio();
             break;
-        case 9:
+        case 8:
             obtenerMCMyMCD();
             break;
-        case 10:
+        case 9:
             actualizarSistema();
             break;
-        case 11:
+        case 10:
             calculadora();
             break;
-        case 12:
+        case 11:
             system("clear");
             break;
+        case 12:
+            cout << "En construccion, la graficacion de funciones" << endl;
+            break;
         case 13:
-            cout << "En construccion" << endl;
+            cout << "En construccion, criptograficos" << endl;
             break;
         case 14:
             cout << "En construccion" << endl;
