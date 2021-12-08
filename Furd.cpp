@@ -170,6 +170,16 @@ void obtenerMCMyMCD()
     cout << "El MCM entre " << num1 << " y " << num2 << " es: " << alg.mcm(num1, num2) << endl;
 }
 
+void criptografia()
+{
+    cout << "En construccion, criptograficos" << endl;
+}
+
+void graficarFunciones()
+{
+    cout << "En construccion, la graficacion de funciones" << endl;
+}
+
 void reglaTresInversa()
 {
     Algebraico alg;
@@ -203,7 +213,7 @@ int menu(int &opcion)
         cout << " 1- Dividir hora          6- Obtener numero random     11- Limpiar pantalla " << endl;
         cout << " 2- Sumar horas           7- PRUEBA DE ESCRITORIO      12- Graficar Funciones " << endl;
         cout << " 3- Restar horas          8- Obtener el MCM y MCD      13- Criptograficas " << endl;
-        cout << " 4- Regla de 3 simples    9- Actualizar sistema        14- " << endl;
+        cout << " 4- Regla de 3 simples    9- Actualizar sistema        14- Sobre PC y users" << endl;
         cout << " 5- Regla de 3 inversa   10- Calculadora del sistema   15- Salir " << endl;
         cout << "------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
@@ -267,13 +277,16 @@ int main(int argc, char *argv[])
             system("clear");
             break;
         case 12:
-            cout << "En construccion, la graficacion de funciones" << endl;
+            graficarFunciones();
             break;
         case 13:
-            cout << "En construccion, criptograficos" << endl;
+            criptografia();
             break;
         case 14:
-            cout << "En construccion" << endl;
+            cout << " " << endl;
+            system("w");
+            cout << " " << endl;
+            system("neofetch");
             break;
         case 15:
             cout << "Gracias por usar el programa" << endl;
