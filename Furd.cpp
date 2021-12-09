@@ -156,6 +156,31 @@ void sumarRestarHora(bool sumar)
     cout << " " << horaAux.getHora() << ":" << horaAux.getMinutos() << ":" << horaAux.getSegundos() << endl;
 }
 
+void operacionesHoras()
+{
+    int opcion;
+    cout << "Seleccione una opcion" << endl;
+    cout << "1- Sumar Horas" << endl;
+    cout << "2- Restar Horas" << endl;
+    cout << "3- Dividir Horas entre un numero" << endl;
+    cin >> opcion;
+    cout << " " << endl;
+    switch (opcion)
+    {
+    case 1:
+        sumarRestarHora(true);
+        break;
+    case 2:
+        sumarRestarHora(false);
+        break;
+    case 3:
+        dividirHoras();
+        break;
+    default:
+        break;
+    }
+}
+
 void obtenerMCMyMCD()
 {
     int num1, num2;
@@ -188,6 +213,7 @@ void opcionesInternet()
     cout << "2- IP publica" << endl;
     cout << "3- IP privada" << endl;
     cout << "4- Reiniciar servicio de internet" << endl;
+    cout << "5- Ping Google" << endl;
     cin >> opcion;
 
     cout << " " << endl;
@@ -208,6 +234,9 @@ void opcionesInternet()
         break;
     case 4:
         system("sudo systemctl restart NetworkManager");
+        break;
+    case 5:
+        system("ping www.google.com");
         break;
     default:
         break;
@@ -253,16 +282,30 @@ void actualizarSistema()
     sis.actualizarSistema();
 }
 
+void opcionesUtilesSistema()
+{
+    int opcion;
+    cout << "Seleccione una opcion" << endl;
+    cout << "1- Borrar cache" << endl;
+    cout << "2- AlsaMixer (audio)" << endl;
+    cout << "Opcion: ";
+    cin >> opcion;
+    if (opcion == 1)
+        system("sudo pacman -Sc && yay -Sc");
+    else
+        system("alsamixer");
+}
+
 /* Menu principal */
 int menu(int &opcion)
 {
     try
     {
         cout << "-----------------------------------< FURD >-----------------------------------" << endl;
-        cout << " 1- Dividir hora          6- Obtener numero random     11- Limpiar pantalla " << endl;
-        cout << " 2- Sumar horas           7- PRUEBA DE ESCRITORIO      12- Graficar Funciones " << endl;
-        cout << " 3- Restar horas          8- Obtener el MCM y MCD      13- Criptograficas " << endl;
-        cout << " 4- Regla de Tres         9- Actualizar sistema        14- Sobre PC y users" << endl;
+        cout << " 1- Operaciones horas     6- Obtener numero random     11- Limpiar pantalla " << endl;
+        cout << " 2- Terminal              7- PRUEBA DE ESCRITORIO      12- Graficar Funciones " << endl;
+        cout << " 3- Actualizar sistema    8- Obtener el MCM y MCD      13- Criptograficas " << endl;
+        cout << " 4- Regla de Tres         9- Opciones utiles           14- Sobre PC y users" << endl;
         cout << " 5- Opcion Internet      10- Calculadora del sistema   15- Salir " << endl;
         cout << "------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
@@ -293,13 +336,13 @@ int main(int argc, char *argv[])
         switch (menu(opcion))
         {
         case 1:
-            dividirHoras();
+            operacionesHoras();
             break;
         case 2:
-            sumarRestarHora(true);
+            system("/bin/bash");
             break;
         case 3:
-            sumarRestarHora(false);
+            actualizarSistema();
             break;
         case 4:
             reglaDeTres();
@@ -317,7 +360,7 @@ int main(int argc, char *argv[])
             obtenerMCMyMCD();
             break;
         case 9:
-            actualizarSistema();
+            opcionesUtilesSistema();
             break;
         case 10:
             calculadora();
