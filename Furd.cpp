@@ -180,6 +180,41 @@ void graficarFunciones()
     cout << "En construccion, la graficacion de funciones" << endl;
 }
 
+void opcionesInternet()
+{
+    int opcion;
+    cout << "Seleccione una opcion" << endl;
+    cout << "1- WiFi" << endl;
+    cout << "2- IP publica" << endl;
+    cout << "3- IP privada" << endl;
+    cout << "4- Reiniciar servicio de internet" << endl;
+    cin >> opcion;
+
+    cout << " " << endl;
+
+    switch (opcion)
+    {
+    case 1:
+        system("nmtui");
+        break;
+    case 2:
+        system("curl ifconfig.me");
+        cout << " " << endl;
+        break;
+    case 3:
+        system("ip addr 2> /dev/null");
+        cout << "------------------------------------------------------------------------------" << endl;
+        system("ifconfig 2> /dev/null");
+        break;
+    case 4:
+        system("sudo systemctl restart NetworkManager");
+        break;
+    default:
+        break;
+    }
+    cout << " " << endl;
+}
+
 void reglaTresInversa()
 {
     Algebraico alg;
@@ -190,6 +225,20 @@ void reglaTresSimple()
 {
     Algebraico alg;
     alg.reglaDeTresSimple();
+}
+
+void reglaDeTres()
+{
+    int opcion;
+    cout << "Seleccione una opcion" << endl;
+    cout << "1- Regla de 3 SIMPLE" << endl;
+    cout << "2- Regla de 3 INVERSA" << endl;
+    cout << "Opcion: ";
+    cin >> opcion;
+    if (opcion == 1)
+        reglaTresSimple();
+    else
+        reglaTresInversa();
 }
 
 void calculadora()
@@ -213,8 +262,8 @@ int menu(int &opcion)
         cout << " 1- Dividir hora          6- Obtener numero random     11- Limpiar pantalla " << endl;
         cout << " 2- Sumar horas           7- PRUEBA DE ESCRITORIO      12- Graficar Funciones " << endl;
         cout << " 3- Restar horas          8- Obtener el MCM y MCD      13- Criptograficas " << endl;
-        cout << " 4- Regla de 3 simples    9- Actualizar sistema        14- Sobre PC y users" << endl;
-        cout << " 5- Regla de 3 inversa   10- Calculadora del sistema   15- Salir " << endl;
+        cout << " 4- Regla de Tres         9- Actualizar sistema        14- Sobre PC y users" << endl;
+        cout << " 5- Opcion Internet      10- Calculadora del sistema   15- Salir " << endl;
         cout << "------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
         cin >> opcion;
@@ -253,10 +302,10 @@ int main(int argc, char *argv[])
             sumarRestarHora(false);
             break;
         case 4:
-            reglaTresSimple();
+            reglaDeTres();
             break;
         case 5:
-            reglaTresInversa();
+            opcionesInternet();
             break;
         case 6:
             obtenerNumeroAleatorio();
