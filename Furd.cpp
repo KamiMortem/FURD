@@ -302,11 +302,11 @@ int menu(int &opcion)
     try
     {
         cout << "-----------------------------------< FURD >-----------------------------------" << endl;
-        cout << " 1- Operaciones horas     6- Obtener numero random     11- Limpiar pantalla " << endl;
-        cout << " 2- Terminal              7- PRUEBA DE ESCRITORIO      12- Graficar Funciones " << endl;
-        cout << " 3- Actualizar sistema    8- Obtener el MCM y MCD      13- Criptograficas " << endl;
-        cout << " 4- Regla de Tres         9- Opciones utiles           14- Sobre PC y users" << endl;
-        cout << " 5- Opcion Internet      10- Calculadora del sistema   15- Salir " << endl;
+        cout << " 1- Terminal               6- Obtener numero random     11- Limpiar pantalla " << endl;
+        cout << " 2- Opcion Internet        7- PRUEBA DE ESCRITORIO      12- Graficar Funciones " << endl;
+        cout << " 3- Actualizar sistema     8- Sobre PC y users          13- Criptograficas " << endl;
+        cout << " 4- Regla de Tres          9- Opciones utiles           14- Obtener el MCM y MCD " << endl;
+        cout << " 5- Calculadora           10- Operaciones horas        15- Salir " << endl;
         cout << "------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
         cin >> opcion;
@@ -336,10 +336,10 @@ int main(int argc, char *argv[])
         switch (menu(opcion))
         {
         case 1:
-            operacionesHoras();
+            system("/bin/bash");
             break;
         case 2:
-            system("/bin/bash");
+            opcionesInternet();
             break;
         case 3:
             actualizarSistema();
@@ -348,7 +348,7 @@ int main(int argc, char *argv[])
             reglaDeTres();
             break;
         case 5:
-            opcionesInternet();
+            calculadora();
             break;
         case 6:
             obtenerNumeroAleatorio();
@@ -357,13 +357,16 @@ int main(int argc, char *argv[])
             pruebaDeEscritorio();
             break;
         case 8:
-            obtenerMCMyMCD();
+            cout << " " << endl;
+            system("w");
+            cout << " " << endl;
+            system("neofetch");
             break;
         case 9:
             opcionesUtilesSistema();
             break;
         case 10:
-            calculadora();
+            operacionesHoras();
             break;
         case 11:
             system("clear");
@@ -375,10 +378,7 @@ int main(int argc, char *argv[])
             criptografia();
             break;
         case 14:
-            cout << " " << endl;
-            system("w");
-            cout << " " << endl;
-            system("neofetch");
+            obtenerMCMyMCD();
             break;
         case 15:
             cout << "Gracias por usar el programa" << endl;
