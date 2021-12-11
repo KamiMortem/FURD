@@ -300,21 +300,30 @@ void opcionesUtilesSistema()
 {
     int opcion;
     cout << "Seleccione una opcion" << endl;
-    cout << "1- Borrar cache" << endl;
+    cout << "1- Bashtop" << endl;
     cout << "2- AlsaMixer (audio)" << endl;
-    cout << "3- BackUp" << endl;
+    cout << "3- Borrar cache" << endl;
+    cout << "4- BackUp" << endl;
     cout << "Opcion: ";
     cin >> opcion;
-    if (opcion == 1)
-        system("sudo pacman -Sc && yay -Sc");
-    if (opcion == 2)
+    switch (opcion)
     {
+    case 1:
+        system("bashtop");
+        system("clear");
+        break;
+    case 2:
         system("alsamixer");
         system("clear");
-    }
-    if (opcion == 3)
-    {
+        break;
+    case 3:
+        system("sudo pacman -Sc && yay -Sc");
+        break;
+    case 4:
         backup();
+        break;
+    default:
+        break;
     }
 }
 
@@ -322,20 +331,24 @@ void algebraico()
 {
     int opcion;
     cout << "Seleccione una opcion" << endl;
-    cout << "1- Operaciones con horas" << endl;
-    cout << "2- Obtener MCM y MCD" << endl;
-    cout << "3- Graficar funciones" << endl;
+    cout << "1- Regla de 3" << endl;
+    cout << "2- Operaciones con horas" << endl;
+    cout << "3- Obtener MCM y MCD" << endl;
+    cout << "4- Graficar funciones" << endl;
     cout << "Opcion: ";
     cin >> opcion;
     switch (opcion)
     {
     case 1:
-        operacionesHoras();
+        reglaDeTres();
         break;
     case 2:
-        obtenerMCMyMCD();
+        operacionesHoras();
         break;
     case 3:
+        obtenerMCMyMCD();
+        break;
+    case 4:
         graficarFunciones();
         break;
     default:
@@ -353,6 +366,12 @@ void operacionesSistema()
     cout << "En construccion " << endl;
 }
 
+void gestorArchivos()
+{
+    system("ranger");
+    system("clear");
+}
+
 /* Menu principal */
 int menu(int &opcion)
 {
@@ -362,7 +381,7 @@ int menu(int &opcion)
         cout << "| 1- Terminal               6- Obtener numero random     11- Limpiar pantalla |" << endl;
         cout << "| 2- Opcion Internet        7- PRUEBA DE ESCRITORIO      12- Criptograficas   |" << endl;
         cout << "| 3- Actualizar sistema     8- Sobre PC y users          13- Notas            |" << endl;
-        cout << "| 4- Regla de Tres          9- Opciones utiles           14- Operaciones Sis  |" << endl;
+        cout << "| 4- Gestor archivos        9- Opciones utiles           14- Operaciones Sis  |" << endl;
         cout << "| 5- Calculadora           10- Opciones Algebraicas      15- Salir            |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
@@ -402,7 +421,7 @@ int main(int argc, char *argv[])
             actualizarSistema();
             break;
         case 4:
-            reglaDeTres();
+            gestorArchivos();
             break;
         case 5:
             calculadora();
