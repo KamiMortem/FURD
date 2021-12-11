@@ -222,6 +222,7 @@ void opcionesInternet()
     {
     case 1:
         system("nmtui");
+        system("clear");
         break;
     case 2:
         system("curl ifconfig.me");
@@ -266,7 +267,7 @@ void reglaDeTres()
     cin >> opcion;
     if (opcion == 1)
         reglaTresSimple();
-    else
+    if (opcion == 2)
         reglaTresInversa();
 }
 
@@ -282,18 +283,74 @@ void actualizarSistema()
     sis.actualizarSistema();
 }
 
+void sobrePC()
+{
+    cout << " " << endl;
+    system("w");
+    cout << " " << endl;
+    system("neofetch");
+}
+
+void backup()
+{
+    cout << "En construccion " << endl;
+}
+
 void opcionesUtilesSistema()
 {
     int opcion;
     cout << "Seleccione una opcion" << endl;
     cout << "1- Borrar cache" << endl;
     cout << "2- AlsaMixer (audio)" << endl;
+    cout << "3- BackUp" << endl;
     cout << "Opcion: ";
     cin >> opcion;
     if (opcion == 1)
         system("sudo pacman -Sc && yay -Sc");
-    else
+    if (opcion == 2)
+    {
         system("alsamixer");
+        system("clear");
+    }
+    if (opcion == 3)
+    {
+        backup();
+    }
+}
+
+void algebraico()
+{
+    int opcion;
+    cout << "Seleccione una opcion" << endl;
+    cout << "1- Operaciones con horas" << endl;
+    cout << "2- Obtener MCM y MCD" << endl;
+    cout << "3- Graficar funciones" << endl;
+    cout << "Opcion: ";
+    cin >> opcion;
+    switch (opcion)
+    {
+    case 1:
+        operacionesHoras();
+        break;
+    case 2:
+        obtenerMCMyMCD();
+        break;
+    case 3:
+        graficarFunciones();
+        break;
+    default:
+        break;
+    }
+}
+
+void notas()
+{
+    cout << "En construccion " << endl;
+}
+
+void operacionesSistema()
+{
+    cout << "En construccion " << endl;
 }
 
 /* Menu principal */
@@ -301,13 +358,13 @@ int menu(int &opcion)
 {
     try
     {
-        cout << "-----------------------------------< FURD >-----------------------------------" << endl;
-        cout << " 1- Terminal               6- Obtener numero random     11- Limpiar pantalla " << endl;
-        cout << " 2- Opcion Internet        7- PRUEBA DE ESCRITORIO      12- Graficar Funciones " << endl;
-        cout << " 3- Actualizar sistema     8- Sobre PC y users          13- Criptograficas " << endl;
-        cout << " 4- Regla de Tres          9- Opciones utiles           14- Obtener el MCM y MCD " << endl;
-        cout << " 5- Calculadora           10- Operaciones horas        15- Salir " << endl;
-        cout << "------------------------------------------------------------------------------" << endl;
+        cout << "-----------------------------------< FURD >------------------------------------" << endl;
+        cout << "| 1- Terminal               6- Obtener numero random     11- Limpiar pantalla |" << endl;
+        cout << "| 2- Opcion Internet        7- PRUEBA DE ESCRITORIO      12- Criptograficas   |" << endl;
+        cout << "| 3- Actualizar sistema     8- Sobre PC y users          13- Notas            |" << endl;
+        cout << "| 4- Regla de Tres          9- Opciones utiles           14- Operaciones Sis  |" << endl;
+        cout << "| 5- Calculadora           10- Opciones Algebraicas      15- Salir            |" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
         cin >> opcion;
 
@@ -357,28 +414,25 @@ int main(int argc, char *argv[])
             pruebaDeEscritorio();
             break;
         case 8:
-            cout << " " << endl;
-            system("w");
-            cout << " " << endl;
-            system("neofetch");
+            sobrePC();
             break;
         case 9:
             opcionesUtilesSistema();
             break;
         case 10:
-            operacionesHoras();
+            algebraico();
             break;
         case 11:
             system("clear");
             break;
         case 12:
-            graficarFunciones();
-            break;
-        case 13:
             criptografia();
             break;
+        case 13:
+            notas();
+            break;
         case 14:
-            obtenerMCMyMCD();
+            operacionesSistema();
             break;
         case 15:
             cout << "Gracias por usar el programa" << endl;
