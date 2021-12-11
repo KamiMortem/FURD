@@ -1,6 +1,10 @@
 #include <iostream>
 #include <stdlib.h>
 #include <limits>
+#include <cstdlib>
+#include <string>
+#include <sstream>
+
 #include "Hora.hpp"
 #include "Algebraico.hpp"
 #include "PruebaEscritori.hpp"
@@ -296,6 +300,38 @@ void backup()
     cout << "En construccion " << endl;
 }
 
+void temporizador()
+{
+    int opcion, tiempo = 0;
+    char unidad;
+    string mensaje;
+    cout << "Elija la unidad de tiempo que usara:" << endl;
+    cout << "h / m / s ? : ";
+    cin >> unidad;
+
+    cin.ignore();
+    cout << "Mensaje del temporizador: " << endl;
+    getline(cin, mensaje);
+
+    cout << "Defina el tiempo: " << endl;
+    cin >> tiempo;
+    if (unidad == 'h')
+    {
+        tiempo = tiempo * 60 * 60;
+    }
+    else
+    {
+        if (unidad == 'm')
+        {
+            tiempo = tiempo * 60;
+        }
+    }
+    stringstream comando;
+    comando << "sleep " << tiempo / 2 << " && notify-send -u normal -t 0 'Mitad de tiempo del temporisador' '" << mensaje << "' &";
+    comando << "sleep " << tiempo << " && notify-send -u critical -t 0 'TERMINO el temporisador' '" << mensaje << "' &";
+    system(comando.str().c_str());
+}
+
 void opcionesUtilesSistema()
 {
     int opcion;
@@ -303,7 +339,9 @@ void opcionesUtilesSistema()
     cout << "1- Bashtop" << endl;
     cout << "2- AlsaMixer (audio)" << endl;
     cout << "3- Borrar cache" << endl;
-    cout << "4- BackUp" << endl;
+    cout << "4- Iniciar dunst" << endl;
+    cout << "5- temporizador" << endl;
+    cout << "6- BackUp" << endl;
     cout << "Opcion: ";
     cin >> opcion;
     switch (opcion)
@@ -320,6 +358,12 @@ void opcionesUtilesSistema()
         system("sudo pacman -Sc && yay -Sc");
         break;
     case 4:
+        system("systemctl start --user dunst.service");
+        break;
+    case 5:
+        temporizador();
+        break;
+    case 6:
         backup();
         break;
     default:
