@@ -46,7 +46,7 @@ void Sistema::actualizarSistema()
     }
     if (comandoBien)
     {
-        system("yay -Syua 2> /dev/null");
+        system("yay -Syua");
         system("yaourt -Syua 2> /dev/null");
         system("sudo snap refresh 2> /dev/null");
     }

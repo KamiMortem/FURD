@@ -163,26 +163,31 @@ void sumarRestarHora(bool sumar)
 void operacionesHoras()
 {
     int opcion;
-    cout << "Seleccione una opcion" << endl;
-    cout << "1- Sumar Horas" << endl;
-    cout << "2- Restar Horas" << endl;
-    cout << "3- Dividir Horas entre un numero" << endl;
-    cin >> opcion;
-    cout << " " << endl;
-    switch (opcion)
+    do
     {
-    case 1:
-        sumarRestarHora(true);
-        break;
-    case 2:
-        sumarRestarHora(false);
-        break;
-    case 3:
-        dividirHoras();
-        break;
-    default:
-        break;
-    }
+        cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
+        cout << "| 1- Sumar Horas                                                              |" << endl;
+        cout << "| 2- Restar Horas                                                             |" << endl;
+        cout << "| 3- Dividir Horas entre un numero                       15- Atras - 0        |" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "Opcion: ";
+        cin >> opcion;
+        cout << " " << endl;
+        switch (opcion)
+        {
+        case 1:
+            sumarRestarHora(true);
+            break;
+        case 2:
+            sumarRestarHora(false);
+            break;
+        case 3:
+            dividirHoras();
+            break;
+        default:
+            break;
+        }
+    } while (opcion != 15 && opcion != 0);
 }
 
 void obtenerMCMyMCD()
@@ -212,41 +217,52 @@ void graficarFunciones()
 void opcionesInternet()
 {
     int opcion;
-    cout << "Seleccione una opcion" << endl;
-    cout << "1- WiFi" << endl;
-    cout << "2- IP publica" << endl;
-    cout << "3- IP privada" << endl;
-    cout << "4- Reiniciar servicio de internet" << endl;
-    cout << "5- Ping Google" << endl;
-    cin >> opcion;
-
-    cout << " " << endl;
-
-    switch (opcion)
+    do
     {
-    case 1:
-        system("nmtui");
-        system("clear");
-        break;
-    case 2:
-        system("curl ifconfig.me");
+        cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
+        cout << "| 1- WiFi                   6- Test Internet                                  |" << endl;
+        cout << "| 2- IP publica             7- Pedir ip                                       |" << endl;
+        cout << "| 3- IP privada                                                               |" << endl;
+        cout << "| 4- Reiniciar int.                                                           |" << endl;
+        cout << "| 5- Ping Google                                         15- Atras - 0        |" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "Opcion: ";
+        cin >> opcion;
+
         cout << " " << endl;
-        break;
-    case 3:
-        system("ip addr 2> /dev/null");
-        cout << "------------------------------------------------------------------------------" << endl;
-        system("ifconfig 2> /dev/null");
-        break;
-    case 4:
-        system("sudo systemctl restart NetworkManager");
-        break;
-    case 5:
-        system("ping www.google.com");
-        break;
-    default:
-        break;
-    }
-    cout << " " << endl;
+
+        switch (opcion)
+        {
+        case 1:
+            system("nmtui");
+            system("clear");
+            break;
+        case 2:
+            system("curl ifconfig.me");
+            cout << " " << endl;
+            break;
+        case 3:
+            system("ip addr 2> /dev/null");
+            cout << "------------------------------------------------------------------------------" << endl;
+            system("ifconfig 2> /dev/null");
+            break;
+        case 4:
+            system("sudo systemctl restart NetworkManager");
+            break;
+        case 5:
+            system("ping www.google.com");
+            break;
+        case 6:
+            system("speedtest-cli");
+            break;
+        case 7:
+            system("ip route");
+            break;
+        default:
+            break;
+        }
+        cout << " " << endl;
+    } while (opcion != 15 && opcion != 0);
 }
 
 void reglaTresInversa()
@@ -264,15 +280,19 @@ void reglaTresSimple()
 void reglaDeTres()
 {
     int opcion;
-    cout << "Seleccione una opcion" << endl;
-    cout << "1- Regla de 3 SIMPLE" << endl;
-    cout << "2- Regla de 3 INVERSA" << endl;
-    cout << "Opcion: ";
-    cin >> opcion;
-    if (opcion == 1)
-        reglaTresSimple();
-    if (opcion == 2)
-        reglaTresInversa();
+    do
+    {
+        cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
+        cout << "| 1- Regla de 3 SIMPLE                                                        |" << endl;
+        cout << "| 2- Regla de 3 INVERSA                                  15- Atras - 0        |" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "Opcion: ";
+        cin >> opcion;
+        if (opcion == 1)
+            reglaTresSimple();
+        if (opcion == 2)
+            reglaTresInversa();
+    } while (opcion != 15 && opcion != 0);
 }
 
 void calculadora()
@@ -335,69 +355,86 @@ void temporizador()
 void opcionesUtilesSistema()
 {
     int opcion;
-    cout << "Seleccione una opcion" << endl;
-    cout << "1- Bashtop" << endl;
-    cout << "2- AlsaMixer (audio)" << endl;
-    cout << "3- Borrar cache" << endl;
-    cout << "4- Iniciar dunst" << endl;
-    cout << "5- temporizador" << endl;
-    cout << "6- BackUp" << endl;
-    cout << "Opcion: ";
-    cin >> opcion;
-    switch (opcion)
+    do
     {
-    case 1:
-        system("bashtop");
-        system("clear");
-        break;
-    case 2:
-        system("alsamixer");
-        system("clear");
-        break;
-    case 3:
-        system("sudo pacman -Sc && yay -Sc");
-        break;
-    case 4:
-        system("systemctl start --user dunst.service");
-        break;
-    case 5:
-        temporizador();
-        break;
-    case 6:
-        backup();
-        break;
-    default:
-        break;
-    }
+        cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
+        cout << "| 1- Bashtop                6- BackUp                                         |" << endl;
+        cout << "| 2- AlsaMixer (audio)      7- Iniciar dunst                                  |" << endl;
+        cout << "| 3- History                8- Telegram-cli                                   |" << endl;
+        cout << "| 4- Borrar cache                                                             |" << endl;
+        cout << "| 5- temporizador                                        15- Atras - 0        |" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "Opcion: ";
+        cin >> opcion;
+        switch (opcion)
+        {
+        case 1:
+            system("bashtop");
+            system("clear");
+            break;
+        case 2:
+            system("alsamixer");
+            system("clear");
+            break;
+        case 3:
+            system("hstr");
+            break;
+        case 4:
+            system("sudo pacman -Sc && yay -Sc");
+            break;
+        case 5:
+            temporizador();
+            break;
+        case 6:
+            backup();
+            break;
+        case 7:
+            system("systemctl start --user dunst.service");
+            break;
+        case 8:
+            system("telegram-cli");
+            break;
+        default:
+            break;
+        }
+    } while (opcion != 15 && opcion != 0);
 }
 
 void algebraico()
 {
     int opcion;
-    cout << "Seleccione una opcion" << endl;
-    cout << "1- Regla de 3" << endl;
-    cout << "2- Operaciones con horas" << endl;
-    cout << "3- Obtener MCM y MCD" << endl;
-    cout << "4- Graficar funciones" << endl;
-    cout << "Opcion: ";
-    cin >> opcion;
-    switch (opcion)
+    do
     {
-    case 1:
-        reglaDeTres();
-        break;
-    case 2:
-        operacionesHoras();
-        break;
-    case 3:
-        obtenerMCMyMCD();
-        break;
-    case 4:
-        graficarFunciones();
-        break;
-    default:
-        break;
-    }
+        cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
+        cout << "| 1- Regla de 3                                                               |" << endl;
+        cout << "| 2- Operaciones con horas                                                    |" << endl;
+        cout << "| 3- Obtener MCM y MCD                                                        |" << endl;
+        cout << "| 4- Graficar funciones                                                       |" << endl;
+        cout << "| 5- Encontrar posicion                                  15- Atras - 0        |" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "Opcion: ";
+        cin >> opcion;
+        switch (opcion)
+        {
+        case 1:
+            reglaDeTres();
+            break;
+        case 2:
+            operacionesHoras();
+            break;
+        case 3:
+            obtenerMCMyMCD();
+            break;
+        case 4:
+            graficarFunciones();
+            break;
+        case 5:
+            cout << "En construccion..." << endl;
+            break;
+        default:
+            break;
+        }
+    } while (opcion != 15 && opcion != 0);
 }
 
 void notas()
@@ -419,6 +456,7 @@ void gestorArchivos()
 /* Menu principal */
 int menu(int &opcion)
 {
+
     try
     {
         cout << "-----------------------------------< FURD >------------------------------------" << endl;
@@ -426,7 +464,7 @@ int menu(int &opcion)
         cout << "| 2- Opcion Internet        7- PRUEBA DE ESCRITORIO      12- Criptograficas   |" << endl;
         cout << "| 3- Actualizar sistema     8- Sobre PC y users          13- Notas            |" << endl;
         cout << "| 4- Gestor archivos        9- Opciones utiles           14- Operaciones Sis  |" << endl;
-        cout << "| 5- Calculadora           10- Opciones Algebraicas      15- Salir            |" << endl;
+        cout << "| 5- Calculadora           10- Opciones Algebraicas      15- Salir - 0        |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
         cin >> opcion;
@@ -500,9 +538,12 @@ int main(int argc, char *argv[])
         case 15:
             cout << "Gracias por usar el programa" << endl;
             break;
+        case 0:
+            cout << "Gracias por usar el programa" << endl;
+            break;
         default:
             cout << "Se equivoco de comando, escribalo nuevamente" << endl;
             break;
         }
-    } while (opcion != 15);
+    } while (opcion != 15 && opcion != 0);
 }
