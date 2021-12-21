@@ -184,10 +184,13 @@ void operacionesHoras()
         case 3:
             dividirHoras();
             break;
+        case 111:
+            system("clear");
+            break;
         default:
             break;
         }
-    } while (opcion != 15 && opcion != 0);
+    } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
 
 void obtenerMCMyMCD()
@@ -258,11 +261,14 @@ void opcionesInternet()
         case 7:
             system("ip route");
             break;
+        case 111:
+            system("clear");
+            break;
         default:
             break;
         }
         cout << " " << endl;
-    } while (opcion != 15 && opcion != 0);
+    } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
 
 void reglaTresInversa()
@@ -288,11 +294,21 @@ void reglaDeTres()
         cout << "-------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
         cin >> opcion;
-        if (opcion == 1)
+        switch (opcion)
+        {
+        case 1:
             reglaTresSimple();
-        if (opcion == 2)
+            break;
+        case 2:
             reglaTresInversa();
-    } while (opcion != 15 && opcion != 0);
+            break;
+        case 111:
+            system("clear");
+            break;
+        default:
+            break;
+        }
+    } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
 
 void calculadora()
@@ -309,6 +325,8 @@ void actualizarSistema()
 
 void sobrePC()
 {
+    cout << " " << endl;
+    system("free -lh");
     cout << " " << endl;
     system("w");
     cout << " " << endl;
@@ -361,8 +379,8 @@ void opcionesUtilesSistema()
         cout << "| 1- Bashtop                6- BackUp                                         |" << endl;
         cout << "| 2- AlsaMixer (audio)      7- Iniciar dunst                                  |" << endl;
         cout << "| 3- History                8- Telegram-cli                                   |" << endl;
-        cout << "| 4- Borrar cache                                                             |" << endl;
-        cout << "| 5- temporizador                                        15- Atras - 0        |" << endl;
+        cout << "| 4- Borrar cache           9- Calendario                                     |" << endl;
+        cout << "| 5- temporizador          10- Clima                     15- Atras - 0        |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
         cin >> opcion;
@@ -394,10 +412,19 @@ void opcionesUtilesSistema()
         case 8:
             system("telegram-cli");
             break;
+        case 9:
+            system("date +%Y | cal");
+            break;
+        case 10:
+            system("curl -s wttr.in | head -n 7");
+            break;
+        case 111:
+            system("clear");
+            break;
         default:
             break;
         }
-    } while (opcion != 15 && opcion != 0);
+    } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
 
 void algebraico()
@@ -431,10 +458,13 @@ void algebraico()
         case 5:
             cout << "En construccion..." << endl;
             break;
+        case 111:
+            system("clear");
+            break;
         default:
             break;
         }
-    } while (opcion != 15 && opcion != 0);
+    } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
 
 void notas()
@@ -442,9 +472,95 @@ void notas()
     cout << "En construccion " << endl;
 }
 
+void montarDisco()
+{
+    system("lsblk -fm");
+}
+
+void repararGrub()
+{
+    int opcion;
+    do
+    {
+        cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
+        cout << "| 1- Arch UEFI                                                                |" << endl;
+        cout << "| 2- Arch NO UEFI                                                             |" << endl;
+        cout << "| 3- Debian UEFI                                                              |" << endl;
+        cout << "| 4- Debian NO UEFI                                      15- Atras - 0        |" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "Opcion: ";
+        cin >> opcion;
+        switch (opcion)
+        {
+        case 1:
+            system("sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub");
+            system("sudo grub-mkconfig -o /boot/grub/grub.cfg");
+            cout << "controla que exista la linea: GRUB_DISABLE_OS_PROBER=false" << endl;
+            system("read ; sudo nano /etc/default/grub");
+            system("sudo update-grub");
+            system("sudo os-prober");
+            break;
+        case 2:
+            system("");
+            break;
+        case 3:
+            system("");
+            break;
+        case 4:
+            system("");
+            break;
+        case 111:
+            system("clear");
+            break;
+        default:
+            break;
+        }
+    } while (opcion != 15 && opcion != 0 && opcion != 111);
+}
+
 void operacionesSistema()
 {
-    cout << "En construccion " << endl;
+    int opcion;
+    do
+    {
+        cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
+        cout << "| 1- Apagar PC              6- Reparar Grub                                   |" << endl;
+        cout << "| 2- Reiniciar PC                                                             |" << endl;
+        cout << "| 3- Suspender PC                                                             |" << endl;
+        cout << "| 4- Informacion discos                                                       |" << endl;
+        cout << "| 5- Montar discos                                       15- Atras - 0        |" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "Opcion: ";
+        cin >> opcion;
+        switch (opcion)
+        {
+        case 1:
+            system("sudo shutdown now");
+            break;
+        case 2:
+            system("sudo shutdown -r now");
+            break;
+        case 3:
+            system("echo 'suspender'");
+            break;
+        case 4:
+            system("lsblk -fm");
+            system("sudo fdisk -l");
+            system("df -lh");
+            break;
+        case 5:
+            montarDisco();
+            break;
+        case 6:
+            repararGrub();
+            break;
+        case 111:
+            system("clear");
+            break;
+        default:
+            break;
+        }
+    } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
 
 void gestorArchivos()
@@ -541,9 +657,13 @@ int main(int argc, char *argv[])
         case 0:
             cout << "Gracias por usar el programa" << endl;
             break;
+        case 111:
+            cout << "Gracias por usar el programa" << endl;
+            system("clear");
+            break;
         default:
             cout << "Se equivoco de comando, escribalo nuevamente" << endl;
             break;
         }
-    } while (opcion != 15 && opcion != 0);
+    } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
