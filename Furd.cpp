@@ -14,6 +14,14 @@ using namespace std;
 
 typedef char tcad[30];
 
+void borrarMenus(int cant)
+{
+    for (int i = 0; i < cant; i++)
+    {
+        cout << "\e[A";
+    }
+}
+
 void pruebaDeEscritorio()
 {
     PruebaEscritori pruebaEsc;
@@ -160,6 +168,7 @@ void sumarRestarHora(bool sumar)
     cout << " " << horaAux.getHora() << ":" << horaAux.getMinutos() << ":" << horaAux.getSegundos() << endl;
 }
 
+/* Menu de operaciones de horas */
 void operacionesHoras()
 {
     int opcion;
@@ -217,6 +226,7 @@ void graficarFunciones()
     cout << "En construccion, la graficacion de funciones" << endl;
 }
 
+/* Menu de opciones de internet */
 void opcionesInternet()
 {
     int opcion;
@@ -283,6 +293,7 @@ void reglaTresSimple()
     alg.reglaDeTresSimple();
 }
 
+/* Menu de regla de 3 */
 void reglaDeTres()
 {
     int opcion;
@@ -370,6 +381,7 @@ void temporizador()
     system(comando.str().c_str());
 }
 
+/* Menu de opciones utiles */
 void opcionesUtilesSistema()
 {
     int opcion;
@@ -427,6 +439,7 @@ void opcionesUtilesSistema()
     } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
 
+/* Menu de opciones algebraicas */
 void algebraico()
 {
     int opcion;
@@ -477,6 +490,7 @@ void montarDisco()
     system("lsblk -fm");
 }
 
+/* Menu para reparar GRUB */
 void repararGrub()
 {
     int opcion;
@@ -518,6 +532,7 @@ void repararGrub()
     } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
 
+/* Menu de operaciones del sistema */
 void operacionesSistema()
 {
     int opcion;
@@ -601,10 +616,11 @@ int menu(int &opcion)
     return opcion;
 }
 
+/* MAIN */
 int main(int argc, char *argv[])
 {
     int opcion;
-
+    borrarMenus(1);
     do
     {
         switch (menu(opcion))
@@ -613,7 +629,9 @@ int main(int argc, char *argv[])
             system("/bin/bash");
             break;
         case 2:
+            borrarMenus(8);
             opcionesInternet();
+            borrarMenus(10);
             break;
         case 3:
             actualizarSistema();
@@ -628,16 +646,22 @@ int main(int argc, char *argv[])
             obtenerNumeroAleatorio();
             break;
         case 7:
+            borrarMenus(8);
             pruebaDeEscritorio();
+            borrarMenus(10);
             break;
         case 8:
             sobrePC();
             break;
         case 9:
+            borrarMenus(8);
             opcionesUtilesSistema();
+            borrarMenus(8);
             break;
         case 10:
+            borrarMenus(8);
             algebraico();
+            borrarMenus(8);
             break;
         case 11:
             system("clear");
@@ -649,7 +673,9 @@ int main(int argc, char *argv[])
             notas();
             break;
         case 14:
+            borrarMenus(8);
             operacionesSistema();
+            borrarMenus(8);
             break;
         case 15:
             cout << "Gracias por usar el programa" << endl;
