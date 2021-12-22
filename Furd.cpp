@@ -399,6 +399,20 @@ void temporizador()
     system(comando.str().c_str());
 }
 
+void conectarSSH()
+{
+    string ip, usuario;
+    stringstream comando;
+    cout << "Ingrese el nombre de usuario: ";
+    cin.ignore();
+    getline(cin, usuario);
+    cout << "Ingrese la ip o nombre de maquina: ";
+    getline(cin, ip);
+
+    comando << "ssh " << usuario << "@" << ip;
+    system(comando.str().c_str());
+}
+
 /* Menu de opciones utiles */
 void opcionesUtilesSistema()
 {
@@ -406,7 +420,7 @@ void opcionesUtilesSistema()
     do
     {
         cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
-        cout << "| 1- Bashtop                6- BackUp                                         |" << endl;
+        cout << "| 1- Bashtop                6- BackUp                    11- SSH              |" << endl;
         cout << "| 2- AlsaMixer (audio)      7- Iniciar dunst                                  |" << endl;
         cout << "| 3- History                8- Telegram-cli                                   |" << endl;
         cout << "| 4- Borrar cache           9- Calendario                                     |" << endl;
@@ -447,6 +461,9 @@ void opcionesUtilesSistema()
             break;
         case 10:
             system("curl -s wttr.in | head -n 7");
+            break;
+        case 11:
+            conectarSSH();
             break;
         case 111:
             system("clear");
