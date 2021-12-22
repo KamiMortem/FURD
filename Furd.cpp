@@ -226,6 +226,20 @@ void graficarFunciones()
     cout << "En construccion, la graficacion de funciones" << endl;
 }
 
+void escanearRed()
+{
+    string ip;
+    stringstream comando, comando1;
+    cout << "Ingrese la ip que desea escanear. Ej: 192.168.1.*" << endl;
+    cin.ignore();
+    cout << "IP: ";
+    getline(cin, ip);
+    comando << "nmap -sP " << ip;
+    system(comando.str().c_str());
+    comando1 << "nmap -F " << ip;
+    system(comando1.str().c_str());
+}
+
 /* Menu de opciones de internet */
 void opcionesInternet()
 {
@@ -235,7 +249,7 @@ void opcionesInternet()
         cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
         cout << "| 1- WiFi                   6- Test Internet                                  |" << endl;
         cout << "| 2- IP publica             7- Pedir ip                                       |" << endl;
-        cout << "| 3- IP privada                                                               |" << endl;
+        cout << "| 3- IP privada             8- Escanear red                                   |" << endl;
         cout << "| 4- Reiniciar int.                                                           |" << endl;
         cout << "| 5- Ping Google                                         15- Atras - 0        |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
@@ -270,6 +284,9 @@ void opcionesInternet()
             break;
         case 7:
             system("ip route");
+            break;
+        case 8:
+            escanearRed();
             break;
         case 111:
             system("clear");
@@ -337,6 +354,7 @@ void actualizarSistema()
 void sobrePC()
 {
     cout << " " << endl;
+    system("sensors");
     system("free -lh");
     cout << " " << endl;
     system("w");
@@ -643,6 +661,7 @@ int main(int argc, char *argv[])
             calculadora();
             break;
         case 6:
+            borrarMenus(8);
             obtenerNumeroAleatorio();
             break;
         case 7:
