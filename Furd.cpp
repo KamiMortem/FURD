@@ -421,8 +421,8 @@ void opcionesUtilesSistema()
     {
         cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
         cout << "| 1- Bashtop                6- BackUp                    11- SSH              |" << endl;
-        cout << "| 2- AlsaMixer (audio)      7- Iniciar dunst                                  |" << endl;
-        cout << "| 3- History                8- Telegram-cli                                   |" << endl;
+        cout << "| 2- AlsaMixer (audio)      7- Iniciar dunst             12- elinks           |" << endl;
+        cout << "| 3- History                8- Telegram-cli              13- cmus             |" << endl;
         cout << "| 4- Borrar cache           9- Calendario                                     |" << endl;
         cout << "| 5- temporizador          10- Clima                     15- Atras - 0        |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
@@ -464,6 +464,12 @@ void opcionesUtilesSistema()
             break;
         case 11:
             conectarSSH();
+            break;
+        case 12:
+            system("elinks");
+            break;
+        case 13:
+            system("cmus");
             break;
         case 111:
             system("clear");
