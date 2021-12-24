@@ -3,6 +3,7 @@
 #include <limits>
 #include <cstdlib>
 #include <string>
+#include <cstring>
 #include <sstream>
 
 #include "Hora.hpp"
@@ -224,6 +225,12 @@ void criptografia()
 void graficarFunciones()
 {
     cout << "En construccion, la graficacion de funciones" << endl;
+}
+
+void encontrarPosicion()
+{
+    Algebraico alg;
+    alg.encontrarPosicion();
 }
 
 void escanearRed()
@@ -510,7 +517,7 @@ void algebraico()
             graficarFunciones();
             break;
         case 5:
-            cout << "En construccion..." << endl;
+            encontrarPosicion();
             break;
         case 111:
             system("clear");
