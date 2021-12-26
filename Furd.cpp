@@ -674,7 +674,7 @@ int main(int argc, char *argv[])
         switch (menu(opcion))
         {
         case 1:
-            system("/bin/bash");
+            system("/bin/zsh 2> /dev/null || /bin/bash");
             break;
         case 2:
             borrarMenus(8);

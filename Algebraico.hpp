@@ -199,6 +199,7 @@ void Algebraico::ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cant
      {
           if (!(posicionOrdenada < posicion1Ordenada))
           {
+               strcpy(ordenOrdenadas[posicion1Ordenada], guardarValor);
                for (int i = posicion1Ordenada; i < posicionOrdenada; i++)
                {
                     /* code */
@@ -209,6 +210,7 @@ void Algebraico::ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cant
      {
           if (!(posicionOrdenada + 1 == posicion1Ordenada || posicionOrdenada - 1 == posicion1Ordenada))
           {
+               strcpy(ordenOrdenadas[posicion1Ordenada], guardarValor);
                for (int i = posicion1Ordenada; i < posicionOrdenada; i++)
                {
                     /* code */
@@ -219,6 +221,7 @@ void Algebraico::ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cant
      {
           if (!(posicionOrdenada > posicion1Ordenada))
           {
+               strcpy(ordenOrdenadas[posicionOrdenada], guardarValor);
                for (int i = posicionOrdenada; i < posicion1Ordenada; i++)
                {
                     /* code */
