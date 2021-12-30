@@ -281,7 +281,6 @@ void Algebraico::ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cant
           }
           strcpy(ordenOrdenadas[posicionMayor], valorMenor);
           strcpy(ordenOrdenadas[posicionMayor - 1], valorMayor);
-          cout << "Cambio algo" << endl;
      }
 }
 

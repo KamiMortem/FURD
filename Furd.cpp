@@ -247,6 +247,26 @@ void escanearRed()
     system(comando1.str().c_str());
 }
 
+void agregarRedOculta()
+{
+    stringstream comando;
+    string nombreRed, contraseniaRed, tarjetaRed;
+
+    cout << "Ingrese nombre de la tarjeta de red: ";
+    cin.ignore();
+    getline(cin, tarjetaRed);
+
+    cout << "Ingrese el nombre de la red: ";
+    getline(cin, nombreRed);
+
+    cout << "Ingrese la contraseña de la red: ";
+    getline(cin, contraseniaRed);
+
+    comando << "nmcli c add type wifi con-name " << nombreRed << " ifname " << tarjetaRed
+            << " ssid '" << nombreRed << "' ; nmcli dev wifi connect '" << nombreRed << "' password " << contraseniaRed << " hidden yes";
+    system(comando.str().c_str());
+}
+
 /* Menu de opciones de internet */
 void opcionesInternet()
 {
@@ -257,7 +277,7 @@ void opcionesInternet()
         cout << "| 1- WiFi                   6- Test Internet                                  |" << endl;
         cout << "| 2- IP publica             7- Pedir ip                                       |" << endl;
         cout << "| 3- IP privada             8- Escanear red                                   |" << endl;
-        cout << "| 4- Reiniciar int.                                                           |" << endl;
+        cout << "| 4- Reiniciar int.         9- Agregar red oculta                             |" << endl;
         cout << "| 5- Ping Google                                         15- Atras - 0        |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
@@ -276,9 +296,9 @@ void opcionesInternet()
             cout << " " << endl;
             break;
         case 3:
-            system("ip addr 2> /dev/null");
-            cout << "------------------------------------------------------------------------------" << endl;
             system("ifconfig 2> /dev/null");
+            cout << "------------------------------------------------------------------------------" << endl;
+            system("ip addr 2> /dev/null");
             break;
         case 4:
             system("sudo systemctl restart NetworkManager");
@@ -294,6 +314,9 @@ void opcionesInternet()
             break;
         case 8:
             escanearRed();
+            break;
+        case 9:
+            agregarRedOculta();
             break;
         case 111:
             system("clear");
@@ -635,6 +658,16 @@ void gestorArchivos()
     system("clear");
 }
 
+void menuAyuda()
+{
+    cout << "La ayuda aun no esta disponible" << endl;
+}
+
+void instalarDependenciasAdicionales()
+{
+    cout << "Aqui se podra instalar las dependencias." << endl;
+}
+
 /* Menu principal */
 int menu(int &opcion)
 {
@@ -738,6 +771,12 @@ int main(int argc, char *argv[])
         case 111:
             cout << "Gracias por usar el programa" << endl;
             system("clear");
+            break;
+        case 999:
+            instalarDependenciasAdicionales();
+            break;
+        case 911:
+            menuAyuda();
             break;
         default:
             cout << "Se equivoco de comando, escribalo nuevamente" << endl;
