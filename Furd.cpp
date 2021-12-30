@@ -362,6 +362,8 @@ void sobrePC()
 {
     cout << " " << endl;
     system("sensors");
+    system("time");
+    cout << " " << endl;
     system("free -lh");
     cout << " " << endl;
     system("w");
@@ -464,7 +466,8 @@ void opcionesUtilesSistema()
             system("telegram-cli");
             break;
         case 9:
-            system("date +%Y | cal");
+            system("cal -y");
+            system("date");
             break;
         case 10:
             system("curl -s wttr.in | head -n 7");

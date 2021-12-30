@@ -14,6 +14,7 @@ private:
      int encontrarValorOrdenEncontrarPosicion(tcad orden[], int cantidad, tcad variable);
      void ordenarVariablesEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][100], int &cantidadRelaciones, tcad ordenOrdenadas[]);
      void ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][100], int numeroRelacion, tcad ordenOrdenadas[]);
+     void mostrarRelacionesEncontrarPosicion(int relaciones[100][100], int cantidadRelaciones, tcad orden[], int cantidad);
 
 public:
      Algebraico(/* args */);
@@ -101,6 +102,47 @@ int Algebraico::mcm(int num1, int num2)
      return result;
 }
 
+int Algebraico::encontrarValorOrdenEncontrarPosicion(tcad orden[], int cantidad, tcad variable)
+{
+     int pos = -1;
+     for (int i = 0; i < cantidad; i++)
+     {
+          if (strcmp(orden[i], variable) == 0)
+          {
+               pos = i;
+               return pos;
+          }
+     }
+     return pos;
+}
+
+void Algebraico::mostrarRelacionesEncontrarPosicion(int relaciones[100][100], int cantidadRelaciones, tcad orden[], int cantidad)
+{
+     char relacion;
+     int var1;
+     int var2;
+     for (int i = 0; i < cantidadRelaciones; i++)
+     {
+
+          switch (relaciones[i][1])
+          {
+          case 1:
+               relacion = '<';
+               break;
+          case 2:
+               relacion = '=';
+               break;
+          case 3:
+               relacion = '>';
+               break;
+          default:
+               cout << "ingreso un valor no valido" << endl;
+               break;
+          }
+          cout << "Relacion N°" << i << ": " << orden[relaciones[i][0]] << " " << relacion << " " << orden[relaciones[i][2]] << endl;
+     }
+}
+
 void Algebraico::mostrarOrdenEncontrarPosicion(tcad orden[], int &cantidad)
 {
      cout << "-------------------------------------------------------------------------------" << endl;
@@ -128,32 +170,22 @@ void Algebraico::cargarVariablesEncontrarPosicion(tcad orden[], int &cantidad)
      } while (opcion != 'n' && opcion != 'N');
 }
 
-int Algebraico::encontrarValorOrdenEncontrarPosicion(tcad orden[], int cantidad, tcad variable)
-{
-     int pos = -1;
-     for (int i = 0; i < cantidad; i++)
-     {
-          if (strcmp(orden[i], variable) == 0)
-          {
-               pos = i;
-               return pos;
-          }
-     }
-     return pos;
-}
-
 void Algebraico::cargarValoresEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][100], int &cantidadRelaciones)
 {
      char opcion;
      int posicion, posicion1;
      int relacion;
+     tcad variable;
+     tcad variable1;
+     char relacionCaracter;
      do
      {
+          mostrarRelacionesEncontrarPosicion(relaciones, cantidadRelaciones, orden, cantidad);
           mostrarOrdenEncontrarPosicion(orden, cantidad);
           do
           {
                posicion = -1;
-               tcad variable;
+
                cout << "Ingrese una variable de la lista para la 1era relacion: ";
                cin >> variable;
                posicion = encontrarValorOrdenEncontrarPosicion(orden, cantidad, variable);
@@ -162,7 +194,7 @@ void Algebraico::cargarValoresEncontrarPosicion(tcad orden[], int &cantidad, int
           do
           {
                posicion1 = -1;
-               tcad variable1;
+
                cout << "Ingrese una variable de la lista para la 2da relacion: ";
                cin >> variable1;
                posicion1 = encontrarValorOrdenEncontrarPosicion(orden, cantidad, variable1);
@@ -173,6 +205,22 @@ void Algebraico::cargarValoresEncontrarPosicion(tcad orden[], int &cantidad, int
                cout << "Ingrese la relacion entre la 1era y 2da variable: " << endl;
                cout << " 1- '<'               2- '='               3- '>'" << endl;
                cin >> relacion;
+               switch (relacion)
+               {
+               case 1:
+                    relacionCaracter = '<';
+                    break;
+               case 2:
+                    relacionCaracter = '=';
+                    break;
+               case 3:
+                    relacionCaracter = '>';
+                    break;
+               default:
+                    cout << "ingreso un valor no valido" << endl;
+                    break;
+               }
+
           } while (relacion != 1 && relacion != 2 && relacion != 3);
 
           relaciones[cantidadRelaciones][0] = posicion;
@@ -180,6 +228,7 @@ void Algebraico::cargarValoresEncontrarPosicion(tcad orden[], int &cantidad, int
           relaciones[cantidadRelaciones][2] = posicion1;
 
           cantidadRelaciones++;
+          cout << "Ingreso la siguiente relacion: " << variable << " " << relacionCaracter << " " << variable1 << endl;
           cout << "Desea ingresar una nueva relacion? s/n" << endl;
           cin >> opcion;
      } while (opcion != 'n' && opcion != 'N');
@@ -192,41 +241,47 @@ void Algebraico::ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cant
      int posicion1 = relaciones[numeroRelacion][2];
      int posicionOrdenada = encontrarValorOrdenEncontrarPosicion(ordenOrdenadas, cantidad, orden[posicion]);
      int posicion1Ordenada = encontrarValorOrdenEncontrarPosicion(ordenOrdenadas, cantidad, orden[posicion1]);
-
-     tcad auxiliar;
-     tcad guardarValor;
+     bool cambia = false;
+     tcad valorMenor;
+     tcad valorMayor;
      if (relacion == 1)
      {
           if (!(posicionOrdenada < posicion1Ordenada))
           {
-               strcpy(ordenOrdenadas[posicion1Ordenada], guardarValor);
-               for (int i = posicion1Ordenada; i < posicionOrdenada; i++)
-               {
-                    /* code */
-               }
+               strcpy(valorMenor, ordenOrdenadas[posicion1Ordenada]);
+               strcpy(valorMayor, ordenOrdenadas[posicionOrdenada]);
+               cambia = true;
           }
      }
      if (relacion == 2)
      {
           if (!(posicionOrdenada + 1 == posicion1Ordenada || posicionOrdenada - 1 == posicion1Ordenada))
           {
-               strcpy(ordenOrdenadas[posicion1Ordenada], guardarValor);
-               for (int i = posicion1Ordenada; i < posicionOrdenada; i++)
-               {
-                    /* code */
-               }
+               strcpy(valorMenor, ordenOrdenadas[posicion1Ordenada]);
+               strcpy(valorMayor, ordenOrdenadas[posicionOrdenada]);
+               cambia = true;
           }
      }
      if (relacion == 3)
      {
           if (!(posicionOrdenada > posicion1Ordenada))
           {
-               strcpy(ordenOrdenadas[posicionOrdenada], guardarValor);
-               for (int i = posicionOrdenada; i < posicion1Ordenada; i++)
-               {
-                    /* code */
-               }
+               strcpy(valorMayor, ordenOrdenadas[posicion1Ordenada]);
+               strcpy(valorMenor, ordenOrdenadas[posicionOrdenada]);
+               cambia = true;
           }
+     }
+     int posicionMenor = encontrarValorOrdenEncontrarPosicion(ordenOrdenadas, cantidad, valorMenor);
+     int posicionMayor = encontrarValorOrdenEncontrarPosicion(ordenOrdenadas, cantidad, valorMayor);
+     if (cambia)
+     {
+          for (int i = posicionMenor; i < posicionMayor; i++)
+          {
+               strcpy(ordenOrdenadas[i], ordenOrdenadas[i + 1]);
+          }
+          strcpy(ordenOrdenadas[posicionMayor], valorMenor);
+          strcpy(ordenOrdenadas[posicionMayor - 1], valorMayor);
+          cout << "Cambio algo" << endl;
      }
 }
 
@@ -236,14 +291,14 @@ void Algebraico::ordenarVariablesEncontrarPosicion(tcad orden[], int &cantidad, 
      {
           ordenarVariableUnaAUnaEncontrarPosicion(orden, cantidad, relaciones, i, ordenOrdenadas);
      }
-     for (int j = cantidadRelaciones; j == 0; j--)
+     /* for (int j = cantidadRelaciones; j >= 0; j--)
      {
           ordenarVariableUnaAUnaEncontrarPosicion(orden, cantidad, relaciones, j, ordenOrdenadas);
      }
      for (int k = 0; k < cantidadRelaciones; k++)
      {
           ordenarVariableUnaAUnaEncontrarPosicion(orden, cantidad, relaciones, k, ordenOrdenadas);
-     }
+     } */
 }
 
 void Algebraico::encontrarPosicion()
@@ -261,5 +316,6 @@ void Algebraico::encontrarPosicion()
           strcpy(ordenOrdenadas[i], orden[i]);
      }
      ordenarVariablesEncontrarPosicion(orden, cantidad, relaciones, cantidadRelaciones, ordenOrdenadas);
+     mostrarRelacionesEncontrarPosicion(relaciones, cantidadRelaciones, orden, cantidad);
      mostrarOrdenEncontrarPosicion(ordenOrdenadas, cantidad);
 }
