@@ -10,11 +10,11 @@ private:
      void reglaDeTresSimpleInversa(float &num1, float &num2, float &num3);
      void cargarVariablesEncontrarPosicion(tcad orden[], int &cantidad);
      void mostrarOrdenEncontrarPosicion(tcad orden[], int &cantidad);
-     void cargarValoresEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][100], int &cantidadRelaciones);
+     void cargarValoresEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][3], int &cantidadRelaciones);
      int encontrarValorOrdenEncontrarPosicion(tcad orden[], int cantidad, tcad variable);
-     void ordenarVariablesEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][100], int &cantidadRelaciones, tcad ordenOrdenadas[]);
-     void ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][100], int numeroRelacion, tcad ordenOrdenadas[]);
-     void mostrarRelacionesEncontrarPosicion(int relaciones[100][100], int cantidadRelaciones, tcad orden[], int cantidad);
+     void ordenarVariablesEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][3], int &cantidadRelaciones, tcad ordenOrdenadas[]);
+     void ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][3], int numeroRelacion, tcad ordenOrdenadas[]);
+     void mostrarRelacionesEncontrarPosicion(int relaciones[100][3], int cantidadRelaciones, tcad orden[], int cantidad);
 
 public:
      Algebraico(/* args */);
@@ -116,7 +116,7 @@ int Algebraico::encontrarValorOrdenEncontrarPosicion(tcad orden[], int cantidad,
      return pos;
 }
 
-void Algebraico::mostrarRelacionesEncontrarPosicion(int relaciones[100][100], int cantidadRelaciones, tcad orden[], int cantidad)
+void Algebraico::mostrarRelacionesEncontrarPosicion(int relaciones[100][3], int cantidadRelaciones, tcad orden[], int cantidad)
 {
      char relacion;
      int var1;
@@ -170,7 +170,7 @@ void Algebraico::cargarVariablesEncontrarPosicion(tcad orden[], int &cantidad)
      } while (opcion != 'n' && opcion != 'N');
 }
 
-void Algebraico::cargarValoresEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][100], int &cantidadRelaciones)
+void Algebraico::cargarValoresEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][3], int &cantidadRelaciones)
 {
      char opcion;
      int posicion, posicion1;
@@ -234,7 +234,7 @@ void Algebraico::cargarValoresEncontrarPosicion(tcad orden[], int &cantidad, int
      } while (opcion != 'n' && opcion != 'N');
 }
 
-void Algebraico::ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][100], int numeroRelacion, tcad ordenOrdenadas[])
+void Algebraico::ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][3], int numeroRelacion, tcad ordenOrdenadas[])
 {
      int posicion = relaciones[numeroRelacion][0];
      int relacion = relaciones[numeroRelacion][1];
@@ -284,26 +284,22 @@ void Algebraico::ordenarVariableUnaAUnaEncontrarPosicion(tcad orden[], int &cant
      }
 }
 
-void Algebraico::ordenarVariablesEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][100], int &cantidadRelaciones, tcad ordenOrdenadas[])
+void Algebraico::ordenarVariablesEncontrarPosicion(tcad orden[], int &cantidad, int relaciones[100][3], int &cantidadRelaciones, tcad ordenOrdenadas[])
 {
      for (int i = 0; i < cantidadRelaciones; i++)
      {
           ordenarVariableUnaAUnaEncontrarPosicion(orden, cantidad, relaciones, i, ordenOrdenadas);
      }
-     /* for (int j = cantidadRelaciones; j >= 0; j--)
+     for (int j = cantidadRelaciones - 1; j >= 0; j--)
      {
           ordenarVariableUnaAUnaEncontrarPosicion(orden, cantidad, relaciones, j, ordenOrdenadas);
      }
-     for (int k = 0; k < cantidadRelaciones; k++)
-     {
-          ordenarVariableUnaAUnaEncontrarPosicion(orden, cantidad, relaciones, k, ordenOrdenadas);
-     } */
 }
 
 void Algebraico::encontrarPosicion()
 {
      tcad orden[100];
-     int relaciones[100][100];
+     int relaciones[100][3];
      tcad ordenOrdenadas[100];
      int cantidad = 0;
      int cantidadRelaciones = 0;

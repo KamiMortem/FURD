@@ -452,7 +452,7 @@ void opcionesUtilesSistema()
     do
     {
         cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
-        cout << "| 1- Bashtop                6- BackUp                    11- SSH              |" << endl;
+        cout << "| 1- Procesos               6- BackUp                    11- SSH              |" << endl;
         cout << "| 2- AlsaMixer (audio)      7- Iniciar dunst             12- elinks           |" << endl;
         cout << "| 3- History                8- Telegram-cli              13- cmus             |" << endl;
         cout << "| 4- Borrar cache           9- Calendario                                     |" << endl;
@@ -463,7 +463,7 @@ void opcionesUtilesSistema()
         switch (opcion)
         {
         case 1:
-            system("bashtop");
+            system("bashtop || htop || top");
             system("clear");
             break;
         case 2:
@@ -493,6 +493,7 @@ void opcionesUtilesSistema()
             system("date");
             break;
         case 10:
+            system("curl -s wttr.in");
             system("curl -s wttr.in | head -n 7");
             break;
         case 11:
