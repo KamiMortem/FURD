@@ -57,5 +57,5 @@ void Sistema::actualizarSistema()
 
 void Sistema::calculadora()
 {
-    system("calc");
+    system("qalc || gcalccmd || calc || bc");
 }

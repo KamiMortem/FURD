@@ -391,7 +391,7 @@ void sobrePC()
     cout << " " << endl;
     system("w");
     cout << " " << endl;
-    system("neofetch");
+    system("neofetch || pfetch || screenfetch");
 }
 
 void backup()
@@ -471,7 +471,7 @@ void opcionesUtilesSistema()
             system("clear");
             break;
         case 3:
-            system("hstr");
+            system("hstr || history");
             break;
         case 4:
             system("sudo pacman -Sc && yay -Sc");
@@ -500,10 +500,10 @@ void opcionesUtilesSistema()
             conectarSSH();
             break;
         case 12:
-            system("elinks");
+            system("elinks || links2 || links");
             break;
         case 13:
-            system("cmus");
+            system("cmus || moc");
             break;
         case 111:
             system("clear");
@@ -615,7 +615,7 @@ void operacionesSistema()
     {
         cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
         cout << "| 1- Apagar PC              6- Reparar Grub                                   |" << endl;
-        cout << "| 2- Reiniciar PC                                                             |" << endl;
+        cout << "| 2- Reiniciar PC           7- Apagar 30m                                     |" << endl;
         cout << "| 3- Suspender PC                                                             |" << endl;
         cout << "| 4- Informacion discos                                                       |" << endl;
         cout << "| 5- Montar discos                                       15- Atras - 0        |" << endl;
@@ -631,7 +631,7 @@ void operacionesSistema()
             system("sudo shutdown -r now");
             break;
         case 3:
-            system("echo 'suspender'");
+            system("sudo pm-suspend-hybrid || sudo pm-hibernate || sudo systemctl hybrid-sleep || sudo systemctl suspend");
             break;
         case 4:
             system("lsblk -fm");
@@ -644,6 +644,9 @@ void operacionesSistema()
         case 6:
             repararGrub();
             break;
+        case 7:
+            system("sudo shutdown 30");
+            break;
         case 111:
             system("clear");
             break;
@@ -655,7 +658,7 @@ void operacionesSistema()
 
 void gestorArchivos()
 {
-    system("ranger");
+    system("ranger || fman || mc || vifm || nnn || lfm || lf || wcm");
     system("clear");
 }
 
@@ -666,7 +669,32 @@ void menuAyuda()
 
 void instalarDependenciasAdicionales()
 {
-    cout << "Aqui se podra instalar las dependencias." << endl;
+    int opcion;
+    cout << "Instalando programas extras." << endl;
+    cout << "Sistema de archivos usado:" << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+    cout << "| 1- Deb                    2- Pacman                     3- dnf              | " << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+    cout << "Opcion: ";
+    cin >> opcion;
+
+    switch (opcion)
+    {
+    case 1:
+        system("sudo apt-get install neofetch htop lm-sensors ranger nmap curl elinks cmus telegram-cli speedtest-cli iftop");
+        break;
+    case 2:
+        system("sudo pacman -S neofetch bashtop lm-sensors ranger nmap curl elinks cmus telegram-cli speedtest-cli iftop");
+        break;
+    case 3:
+        system("dnf update && sudo dnf upgrade");
+        break;
+    case 0:
+        break;
+    default:
+        cout << "comando invalido" << endl;
+        break;
+    }
 }
 
 /* Menu principal */
