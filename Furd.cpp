@@ -243,6 +243,9 @@ void escanearRed()
     getline(cin, ip);
     comando << "nmap -sP " << ip;
     system(comando.str().c_str());
+    cout << " " << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+    cout << " " << endl;
     comando1 << "nmap -F " << ip;
     system(comando1.str().c_str());
 }
@@ -385,7 +388,7 @@ void sobrePC()
 {
     cout << " " << endl;
     system("sensors");
-    system("time");
+    system("time 2> /dev/null");
     cout << " " << endl;
     system("free -lh");
     cout << " " << endl;
@@ -431,6 +434,11 @@ void temporizador()
     system(comando.str().c_str());
 }
 
+void notas()
+{
+    cout << "En construccion " << endl;
+}
+
 void conectarSSH()
 {
     string ip, usuario;
@@ -455,7 +463,7 @@ void opcionesUtilesSistema()
         cout << "| 1- Procesos               6- BackUp                    11- SSH              |" << endl;
         cout << "| 2- AlsaMixer (audio)      7- Iniciar dunst             12- elinks           |" << endl;
         cout << "| 3- History                8- Telegram-cli              13- cmus             |" << endl;
-        cout << "| 4- Borrar cache           9- Calendario                                     |" << endl;
+        cout << "| 4- Borrar cache           9- Calendario                14- Notas            |" << endl;
         cout << "| 5- temporizador          10- Clima                     15- Atras - 0        |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
@@ -505,6 +513,9 @@ void opcionesUtilesSistema()
         case 13:
             system("cmus || moc");
             break;
+        case 14:
+            notas();
+            break;
         case 111:
             system("clear");
             break;
@@ -553,11 +564,6 @@ void algebraico()
             break;
         }
     } while (opcion != 15 && opcion != 0 && opcion != 111);
-}
-
-void notas()
-{
-    cout << "En construccion " << endl;
 }
 
 void montarDisco()
@@ -682,9 +688,10 @@ void instalarDependenciasAdicionales()
     {
     case 1:
         system("sudo apt-get install neofetch htop lm-sensors ranger nmap curl elinks cmus telegram-cli speedtest-cli iftop");
+        system("sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt-get update && sudo apt-get install hstr && hstr --show-configuration >> ~/.bashrc && . ~/.bashrc");
         break;
     case 2:
-        system("sudo pacman -S neofetch bashtop lm-sensors ranger nmap curl elinks cmus telegram-cli speedtest-cli iftop");
+        system("sudo pacman -S neofetch bashtop lm-sensors ranger nmap curl elinks cmus telegram-cli speedtest-cli iftop hstr");
         break;
     case 3:
         system("dnf update && sudo dnf upgrade");
@@ -697,6 +704,49 @@ void instalarDependenciasAdicionales()
     }
 }
 
+void servidores()
+{
+    int opcion;
+    do
+    {
+        cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
+        cout << "| 1- Status de dhcp         6- Status systemctl                               |" << endl;
+        cout << "| 2- Status de firehol                                                        |" << endl;
+        cout << "| 3- Status docker                                                            |" << endl;
+        cout << "| 4- Status Apache                                                            |" << endl;
+        cout << "| 5- Status BD                                           15- Atras - 0        |" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "Opcion: ";
+        cin >> opcion;
+        switch (opcion)
+        {
+        case 1:
+            system("sudo systemctl status isc-dhcp-server");
+            break;
+        case 2:
+            system("sudo systemctl status firehol");
+            break;
+        case 3:
+            system("sudo systemctl status docker");
+            break;
+        case 4:
+            system("sudo systemctl status apache || sudo systemctl status apache2");
+            break;
+        case 5:
+            system("sudo systemctl status mongodb; sudo systemctl status mariadb; sudo systemctl status mysql");
+            break;
+        case 6:
+            system("sudo systemctl status ");
+            break;
+        case 111:
+            system("clear");
+            break;
+        default:
+            break;
+        }
+    } while (opcion != 15 && opcion != 0 && opcion != 111);
+}
+
 /* Menu principal */
 int menu(int &opcion)
 {
@@ -706,7 +756,7 @@ int menu(int &opcion)
         cout << "-----------------------------------< FURD >------------------------------------" << endl;
         cout << "| 1- Terminal               6- Obtener numero random     11- Limpiar pantalla |" << endl;
         cout << "| 2- Opcion Internet        7- PRUEBA DE ESCRITORIO      12- Criptograficas   |" << endl;
-        cout << "| 3- Actualizar sistema     8- Sobre PC y users          13- Notas            |" << endl;
+        cout << "| 3- Actualizar sistema     8- Sobre PC y users          13- Servidores       |" << endl;
         cout << "| 4- Gestor archivos        9- Opciones utiles           14- Operaciones Sis  |" << endl;
         cout << "| 5- Calculadora           10- Opciones Algebraicas      15- Salir - 0        |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
@@ -784,7 +834,7 @@ int main(int argc, char *argv[])
             criptografia();
             break;
         case 13:
-            notas();
+            servidores();
             break;
         case 14:
             borrarMenus(8);
