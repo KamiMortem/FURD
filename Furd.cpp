@@ -270,6 +270,25 @@ void agregarRedOculta()
     system(comando.str().c_str());
 }
 
+void iftop()
+{
+    stringstream comando;
+    string interfaz;
+
+    system("ifconfig 2> /dev/null");
+    cout << "------------------------------------------------------------------------------" << endl;
+    system("ip addr 2> /dev/null");
+    cout << "------------------------------------------------------------------------------" << endl;
+    cout << " " << endl;
+
+    cout << "Ingrese nombre de la interfaz de red: ";
+    cin.ignore();
+    getline(cin, interfaz);
+
+    comando << "sudo iftop -i " << interfaz;
+    system(comando.str().c_str());
+}
+
 /* Menu de opciones de internet */
 void opcionesInternet()
 {
@@ -281,7 +300,7 @@ void opcionesInternet()
         cout << "| 2- IP publica             7- Pedir ip                                       |" << endl;
         cout << "| 3- IP privada             8- Escanear red                                   |" << endl;
         cout << "| 4- Reiniciar int.         9- Agregar red oculta                             |" << endl;
-        cout << "| 5- Ping Google                                         15- Atras - 0        |" << endl;
+        cout << "| 5- Ping Google           10- iftop                     15- Atras - 0        |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
         cout << "Opcion: ";
         cin >> opcion;
@@ -313,6 +332,7 @@ void opcionesInternet()
             system("speedtest-cli");
             break;
         case 7:
+            system("sudo dhclient -r -v");
             system("ip route");
             break;
         case 8:
@@ -320,6 +340,9 @@ void opcionesInternet()
             break;
         case 9:
             agregarRedOculta();
+            break;
+        case 10:
+            iftop();
             break;
         case 111:
             system("clear");
