@@ -285,7 +285,7 @@ void iftop()
     cin.ignore();
     getline(cin, interfaz);
 
-    comando << "sudo iftop -i " << interfaz;
+    comando << "sudo iftop -P -i " << interfaz;
     system(comando.str().c_str());
 }
 
@@ -636,6 +636,52 @@ void repararGrub()
     } while (opcion != 15 && opcion != 0 && opcion != 111);
 }
 
+void doblePantalla()
+{
+    int opcion, opcionNum;
+    stringstream comando;
+    string pantalla, pantalla1, izquierdaDerecha;
+    system("xrandr");
+    cout << "-------------------------------------------------------------------------------" << endl;
+    cout << "| 1- Conectar una pantalla extra                                              |" << endl;
+    cout << "| 2- Desconectar una pantalla                                                 |" << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+    cout << "Opcion: ";
+    cin >> opcion;
+    cin.ignore();
+    switch (opcion)
+    {
+    case 1:
+        cout << "Ingrese la pantalla a usar" << endl;
+        getline(cin, pantalla);
+        cout << "Ingrese la pantalla principal" << endl;
+        getline(cin, pantalla1);
+        cout << "ingrese: " << endl;
+        cout << "1- pantalla a la izquierda" << endl;
+        cout << "2- pantalla a la derecha" << endl;
+        cin >> opcionNum;
+        if (opcionNum == 1)
+        {
+            izquierdaDerecha = "--left-of";
+        }
+        else
+        {
+            izquierdaDerecha = "--right-of";
+        }
+        comando << "xrandr --output " << pantalla << " --auto " << izquierdaDerecha << " " << pantalla1;
+        system(comando.str().c_str());
+        break;
+    case 2:
+        cout << "Ingrese la pantalla a usar" << endl;
+        getline(cin, pantalla);
+        comando << "xrandr --output " << pantalla << " --off ";
+        system(comando.str().c_str());
+        break;
+    default:
+        break;
+    }
+}
+
 /* Menu de operaciones del sistema */
 void operacionesSistema()
 {
@@ -645,7 +691,7 @@ void operacionesSistema()
         cout << "---------------------------< Seleccione una opcion >---------------------------" << endl;
         cout << "| 1- Apagar PC              6- Reparar Grub                                   |" << endl;
         cout << "| 2- Reiniciar PC           7- Apagar 30m                                     |" << endl;
-        cout << "| 3- Suspender PC                                                             |" << endl;
+        cout << "| 3- Suspender PC           8- Doble pantalla                                 |" << endl;
         cout << "| 4- Informacion discos                                                       |" << endl;
         cout << "| 5- Montar discos                                       15- Atras - 0        |" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
@@ -675,6 +721,9 @@ void operacionesSistema()
             break;
         case 7:
             system("sudo shutdown 30");
+            break;
+        case 8:
+            doblePantalla();
             break;
         case 111:
             system("clear");
